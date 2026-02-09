@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Villa Paradise - Content Management System</title>
+    <title>Villa Akari - Content Management System</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -17,6 +17,7 @@
             --border: #e0e6ed;
             --success: #28a745;
             --danger: #dc3545;
+            --info: #17a2b8;
         }
 
         * {
@@ -104,6 +105,15 @@
 
         .btn-success:hover {
             background: #218838;
+        }
+
+        .btn-info {
+            background: var(--info);
+            color: white;
+        }
+
+        .btn-info:hover {
+            background: #138496;
         }
 
         /* Layout */
@@ -332,10 +342,22 @@
             justify-content: center;
         }
 
+        .image-actions {
+            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .image-actions .btn {
+            padding: 5px 15px;
+            font-size: 0.85rem;
+        }
+
         /* Image Grid */
         .images-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 20px;
         }
 
@@ -351,6 +373,15 @@
             background: white;
             font-weight: 600;
             border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .image-card-header .filename {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            font-weight: normal;
         }
 
         .image-card-body {
@@ -409,6 +440,132 @@
             opacity: 1;
         }
 
+        /* Workflow Box */
+        .workflow-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .workflow-box h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .workflow-steps {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .workflow-step {
+            flex: 1;
+            min-width: 200px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .workflow-step .step-number {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-weight: 600;
+        }
+
+        .workflow-step h4 {
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+
+        .workflow-step p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* Alert Box */
+        .alert {
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .alert-info {
+            background: #e7f3ff;
+            border: 1px solid #b6d4fe;
+            color: #084298;
+        }
+
+        .alert-warning {
+            background: #fff3cd;
+            border: 1px solid #ffecb5;
+            color: #664d03;
+        }
+
+        /* Export Section */
+        .export-actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        .file-list {
+            background: var(--bg);
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .file-list h4 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .file-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .file-item .file-name {
+            font-weight: 500;
+        }
+
+        .file-item .file-status {
+            font-size: 0.85rem;
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        .file-item .file-status.ready {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .file-item .file-status.missing {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .container {
@@ -443,37 +600,20 @@
             .images-grid {
                 grid-template-columns: 1fr;
             }
-        }
 
-        /* Export/Import Section */
-        .export-import {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .file-info {
-            background: var(--bg);
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 15px;
-        }
-
-        .file-info code {
-            background: white;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 0.9rem;
+            .workflow-steps {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
     <!-- Header -->
     <header class="header">
-        <h1>🏠 Villa Paradise CMS</h1>
+        <h1>Villa Akari CMS</h1>
         <div class="header-actions">
-            <button class="btn btn-secondary" onclick="previewSite()">👁️ Preview Site</button>
-            <button class="btn btn-primary" onclick="saveAllChanges()">💾 Save All Changes</button>
+            <button class="btn btn-secondary" onclick="previewSite()">Preview Site</button>
+            <button class="btn btn-primary" onclick="exportContentJSON()">Export content.json</button>
         </div>
     </header>
 
@@ -482,30 +622,90 @@
         <aside class="sidebar">
             <div class="sidebar-title">Content Sections</div>
             <ul class="sidebar-nav">
-                <li><a href="#" class="active" data-section="images">🖼️ Images</a></li>
-                <li><a href="#" data-section="general">⚙️ General Settings</a></li>
-                <li><a href="#" data-section="hero">🏠 Hero Section</a></li>
-                <li><a href="#" data-section="about">📖 About Section</a></li>
-                <li><a href="#" data-section="rooms">🛏️ Rooms</a></li>
-                <li><a href="#" data-section="amenities">✨ Amenities</a></li>
-                <li><a href="#" data-section="location">📍 Location</a></li>
-                <li><a href="#" data-section="contact">📞 Contact Info</a></li>
-                <li><a href="#" data-section="export">📤 Export/Import</a></li>
+                <li><a href="#" class="active" data-section="workflow">Workflow</a></li>
+                <li><a href="#" data-section="images">Images</a></li>
+                <li><a href="#" data-section="general">General Settings</a></li>
+                <li><a href="#" data-section="hero">Hero Section</a></li>
+                <li><a href="#" data-section="about">About Section</a></li>
+                <li><a href="#" data-section="rooms">Rooms</a></li>
+                <li><a href="#" data-section="amenities">Amenities</a></li>
+                <li><a href="#" data-section="location">Location</a></li>
+                <li><a href="#" data-section="contact">Contact Info</a></li>
+                <li><a href="#" data-section="export">Export Files</a></li>
             </ul>
         </aside>
 
         <!-- Main Content -->
         <main class="main-content">
+            <!-- Workflow Section -->
+            <div class="section-card active" id="section-workflow">
+                <h2>Workflow Guide</h2>
+                <p>Follow these steps to update your website content and deploy to GitHub Pages.</p>
+
+                <div class="workflow-box">
+                    <h3>How to Update Your Website</h3>
+                    <div class="workflow-steps">
+                        <div class="workflow-step">
+                            <div class="step-number">1</div>
+                            <h4>Edit Content</h4>
+                            <p>Use this CMS to update text content in all languages and upload images.</p>
+                        </div>
+                        <div class="workflow-step">
+                            <div class="step-number">2</div>
+                            <h4>Export Files</h4>
+                            <p>Download content.json and all images with proper file names.</p>
+                        </div>
+                        <div class="workflow-step">
+                            <div class="step-number">3</div>
+                            <h4>Update Repository</h4>
+                            <p>Place files in your project folder and push to GitHub.</p>
+                        </div>
+                        <div class="workflow-step">
+                            <div class="step-number">4</div>
+                            <h4>Live!</h4>
+                            <p>GitHub Pages will automatically update your live website.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alert alert-info">
+                    <strong>File Structure:</strong> Your project should have this structure:
+                    <pre style="margin-top: 10px; background: white; padding: 15px; border-radius: 8px;">
+VillaAkari/
+├── index.html          (main website)
+├── content.json        (all text content)
+├── villa-cms.html      (this CMS - for local use)
+└── images/
+    ├── hero.jpg
+    ├── about.jpg
+    ├── room1.jpg, room2.jpg, room3.jpg
+    ├── gallery1.jpg ... gallery6.jpg
+    └── map.jpg</pre>
+                </div>
+
+                <div class="export-actions" style="margin-top: 20px;">
+                    <button class="btn btn-success" onclick="exportContentJSON()">Download content.json</button>
+                    <button class="btn btn-info" onclick="downloadAllImages()">Download All Images (ZIP)</button>
+                </div>
+            </div>
+
             <!-- Images Section -->
-            <div class="section-card active" id="section-images">
-                <h2>🖼️ Image Management</h2>
-                <p>Upload images for each section of your website. Supported formats: JPG, PNG, WebP, GIF.</p>
+            <div class="section-card" id="section-images">
+                <h2>Image Management</h2>
+                <p>Upload images for each section. Images will be downloaded with correct filenames for the images/ folder.</p>
                 
+                <div class="alert alert-warning">
+                    <strong>Important:</strong> After uploading, use "Download Image" to save each image with the correct filename, then place them in the <code>images/</code> folder.
+                </div>
+
                 <div class="images-grid">
                     <div class="image-card">
-                        <div class="image-card-header">IMG-1: Hero Background</div>
+                        <div class="image-card-header">
+                            Hero Background
+                            <span class="filename">hero.jpg</span>
+                        </div>
                         <div class="image-card-body">
-                            <div class="image-upload-area" data-image="img1">
+                            <div class="image-upload-area" data-image="hero" data-filename="hero.jpg">
                                 <div class="upload-icon">📷</div>
                                 <p>Click or drag image here</p>
                                 <input type="file" accept="image/*">
@@ -515,9 +715,12 @@
                     </div>
 
                     <div class="image-card">
-                        <div class="image-card-header">IMG-2: About Section</div>
+                        <div class="image-card-header">
+                            About Section
+                            <span class="filename">about.jpg</span>
+                        </div>
                         <div class="image-card-body">
-                            <div class="image-upload-area" data-image="img2">
+                            <div class="image-upload-area" data-image="about" data-filename="about.jpg">
                                 <div class="upload-icon">📷</div>
                                 <p>Click or drag image here</p>
                                 <input type="file" accept="image/*">
@@ -527,9 +730,12 @@
                     </div>
 
                     <div class="image-card">
-                        <div class="image-card-header">IMG-3: Master Suite</div>
+                        <div class="image-card-header">
+                            Room 1 (Master Suite)
+                            <span class="filename">room1.jpg</span>
+                        </div>
                         <div class="image-card-body">
-                            <div class="image-upload-area" data-image="img3">
+                            <div class="image-upload-area" data-image="room1" data-filename="room1.jpg">
                                 <div class="upload-icon">📷</div>
                                 <p>Click or drag image here</p>
                                 <input type="file" accept="image/*">
@@ -539,9 +745,12 @@
                     </div>
 
                     <div class="image-card">
-                        <div class="image-card-header">IMG-4: Deluxe Room</div>
+                        <div class="image-card-header">
+                            Room 2 (Deluxe Room)
+                            <span class="filename">room2.jpg</span>
+                        </div>
                         <div class="image-card-body">
-                            <div class="image-upload-area" data-image="img4">
+                            <div class="image-upload-area" data-image="room2" data-filename="room2.jpg">
                                 <div class="upload-icon">📷</div>
                                 <p>Click or drag image here</p>
                                 <input type="file" accept="image/*">
@@ -551,9 +760,12 @@
                     </div>
 
                     <div class="image-card">
-                        <div class="image-card-header">IMG-5: Family Room</div>
+                        <div class="image-card-header">
+                            Room 3 (Family Room)
+                            <span class="filename">room3.jpg</span>
+                        </div>
                         <div class="image-card-body">
-                            <div class="image-upload-area" data-image="img5">
+                            <div class="image-upload-area" data-image="room3" data-filename="room3.jpg">
                                 <div class="upload-icon">📷</div>
                                 <p>Click or drag image here</p>
                                 <input type="file" accept="image/*">
@@ -563,9 +775,12 @@
                     </div>
 
                     <div class="image-card">
-                        <div class="image-card-header">IMG-6: Gallery 1</div>
+                        <div class="image-card-header">
+                            Gallery 1
+                            <span class="filename">gallery1.jpg</span>
+                        </div>
                         <div class="image-card-body">
-                            <div class="image-upload-area" data-image="img6">
+                            <div class="image-upload-area" data-image="gallery1" data-filename="gallery1.jpg">
                                 <div class="upload-icon">📷</div>
                                 <p>Click or drag image here</p>
                                 <input type="file" accept="image/*">
@@ -575,9 +790,12 @@
                     </div>
 
                     <div class="image-card">
-                        <div class="image-card-header">IMG-7: Gallery 2</div>
+                        <div class="image-card-header">
+                            Gallery 2
+                            <span class="filename">gallery2.jpg</span>
+                        </div>
                         <div class="image-card-body">
-                            <div class="image-upload-area" data-image="img7">
+                            <div class="image-upload-area" data-image="gallery2" data-filename="gallery2.jpg">
                                 <div class="upload-icon">📷</div>
                                 <p>Click or drag image here</p>
                                 <input type="file" accept="image/*">
@@ -587,9 +805,12 @@
                     </div>
 
                     <div class="image-card">
-                        <div class="image-card-header">IMG-8: Gallery 3</div>
+                        <div class="image-card-header">
+                            Gallery 3
+                            <span class="filename">gallery3.jpg</span>
+                        </div>
                         <div class="image-card-body">
-                            <div class="image-upload-area" data-image="img8">
+                            <div class="image-upload-area" data-image="gallery3" data-filename="gallery3.jpg">
                                 <div class="upload-icon">📷</div>
                                 <p>Click or drag image here</p>
                                 <input type="file" accept="image/*">
@@ -599,9 +820,12 @@
                     </div>
 
                     <div class="image-card">
-                        <div class="image-card-header">IMG-9: Gallery 4</div>
+                        <div class="image-card-header">
+                            Gallery 4
+                            <span class="filename">gallery4.jpg</span>
+                        </div>
                         <div class="image-card-body">
-                            <div class="image-upload-area" data-image="img9">
+                            <div class="image-upload-area" data-image="gallery4" data-filename="gallery4.jpg">
                                 <div class="upload-icon">📷</div>
                                 <p>Click or drag image here</p>
                                 <input type="file" accept="image/*">
@@ -611,9 +835,12 @@
                     </div>
 
                     <div class="image-card">
-                        <div class="image-card-header">IMG-10: Gallery 5</div>
+                        <div class="image-card-header">
+                            Gallery 5
+                            <span class="filename">gallery5.jpg</span>
+                        </div>
                         <div class="image-card-body">
-                            <div class="image-upload-area" data-image="img10">
+                            <div class="image-upload-area" data-image="gallery5" data-filename="gallery5.jpg">
                                 <div class="upload-icon">📷</div>
                                 <p>Click or drag image here</p>
                                 <input type="file" accept="image/*">
@@ -623,9 +850,12 @@
                     </div>
 
                     <div class="image-card">
-                        <div class="image-card-header">IMG-11: Gallery 6</div>
+                        <div class="image-card-header">
+                            Gallery 6
+                            <span class="filename">gallery6.jpg</span>
+                        </div>
                         <div class="image-card-body">
-                            <div class="image-upload-area" data-image="img11">
+                            <div class="image-upload-area" data-image="gallery6" data-filename="gallery6.jpg">
                                 <div class="upload-icon">📷</div>
                                 <p>Click or drag image here</p>
                                 <input type="file" accept="image/*">
@@ -635,9 +865,12 @@
                     </div>
 
                     <div class="image-card">
-                        <div class="image-card-header">IMG-12: Map/Location</div>
+                        <div class="image-card-header">
+                            Map / Location
+                            <span class="filename">map.jpg</span>
+                        </div>
                         <div class="image-card-body">
-                            <div class="image-upload-area" data-image="img12">
+                            <div class="image-upload-area" data-image="map" data-filename="map.jpg">
                                 <div class="upload-icon">📷</div>
                                 <p>Click or drag image here</p>
                                 <input type="file" accept="image/*">
@@ -650,39 +883,39 @@
 
             <!-- General Settings Section -->
             <div class="section-card" id="section-general">
-                <h2>⚙️ General Settings</h2>
+                <h2>General Settings</h2>
                 <p>Configure your villa name and contact information.</p>
 
                 <div class="form-group">
                     <label>Villa Name / Logo Text</label>
-                    <input type="text" id="villa-name" placeholder="Villa Paradise">
+                    <input type="text" id="villaName" placeholder="Villa Paradise">
                 </div>
 
                 <div class="form-group">
                     <label>WhatsApp Number (with country code)</label>
-                    <input type="tel" id="whatsapp-number" placeholder="+6281234567890">
+                    <input type="tel" id="whatsappNumber" placeholder="+6281234567890">
                     <small>Include country code without spaces or dashes</small>
                 </div>
 
                 <div class="form-group">
                     <label>WhatsApp Pre-filled Message</label>
-                    <input type="text" id="whatsapp-message" placeholder="Hello! I would like to book a stay at Villa Paradise">
+                    <input type="text" id="whatsappMessage" placeholder="Hello! I would like to book a stay at Villa Paradise">
                 </div>
 
                 <div class="form-group">
                     <label>Phone Number (Display)</label>
-                    <input type="tel" id="phone-number" placeholder="+62 812 3456 7890">
+                    <input type="tel" id="phoneNumber" placeholder="+62 812 3456 7890">
                 </div>
 
                 <div class="form-group">
                     <label>Email Address</label>
-                    <input type="email" id="email-address" placeholder="info@villaparadise.com">
+                    <input type="email" id="emailAddress" placeholder="info@villaparadise.com">
                 </div>
             </div>
 
             <!-- Hero Section -->
             <div class="section-card" id="section-hero">
-                <h2>🏠 Hero Section</h2>
+                <h2>Hero Section</h2>
                 <p>Edit the main banner text that visitors see first.</p>
 
                 <div class="lang-tabs">
@@ -739,7 +972,7 @@
 
             <!-- About Section -->
             <div class="section-card" id="section-about">
-                <h2>📖 About Section</h2>
+                <h2>About Section</h2>
                 <p>Tell visitors about your villa.</p>
 
                 <div class="lang-tabs">
@@ -832,7 +1065,7 @@
 
             <!-- Rooms Section -->
             <div class="section-card" id="section-rooms">
-                <h2>🛏️ Rooms Section</h2>
+                <h2>Rooms Section</h2>
                 <p>Configure your room/accommodation information.</p>
 
                 <div class="lang-tabs">
@@ -852,7 +1085,7 @@
                     </div>
 
                     <div class="subsection">
-                        <h3>Room 1 (Master Suite)</h3>
+                        <h3>Room 1</h3>
                         <div class="form-group">
                             <label>Room Name</label>
                             <input type="text" id="room1-title-en" placeholder="Master Suite">
@@ -864,7 +1097,7 @@
                     </div>
 
                     <div class="subsection">
-                        <h3>Room 2 (Deluxe Room)</h3>
+                        <h3>Room 2</h3>
                         <div class="form-group">
                             <label>Room Name</label>
                             <input type="text" id="room2-title-en" placeholder="Deluxe Room">
@@ -876,7 +1109,7 @@
                     </div>
 
                     <div class="subsection">
-                        <h3>Room 3 (Family Room)</h3>
+                        <h3>Room 3</h3>
                         <div class="form-group">
                             <label>Room Name</label>
                             <input type="text" id="room3-title-en" placeholder="Family Room">
@@ -899,7 +1132,7 @@
                     </div>
 
                     <div class="subsection">
-                        <h3>Room 1 (Suite Master)</h3>
+                        <h3>Room 1</h3>
                         <div class="form-group">
                             <label>Room Name</label>
                             <input type="text" id="room1-title-id" placeholder="Suite Master">
@@ -911,7 +1144,7 @@
                     </div>
 
                     <div class="subsection">
-                        <h3>Room 2 (Kamar Deluxe)</h3>
+                        <h3>Room 2</h3>
                         <div class="form-group">
                             <label>Room Name</label>
                             <input type="text" id="room2-title-id" placeholder="Kamar Deluxe">
@@ -923,7 +1156,7 @@
                     </div>
 
                     <div class="subsection">
-                        <h3>Room 3 (Kamar Keluarga)</h3>
+                        <h3>Room 3</h3>
                         <div class="form-group">
                             <label>Room Name</label>
                             <input type="text" id="room3-title-id" placeholder="Kamar Keluarga">
@@ -946,7 +1179,7 @@
                     </div>
 
                     <div class="subsection">
-                        <h3>Room 1 (الجناح الرئيسي)</h3>
+                        <h3>Room 1</h3>
                         <div class="form-group">
                             <label>Room Name</label>
                             <input type="text" id="room1-title-ar" placeholder="الجناح الرئيسي" dir="rtl">
@@ -958,7 +1191,7 @@
                     </div>
 
                     <div class="subsection">
-                        <h3>Room 2 (غرفة ديلوكس)</h3>
+                        <h3>Room 2</h3>
                         <div class="form-group">
                             <label>Room Name</label>
                             <input type="text" id="room2-title-ar" placeholder="غرفة ديلوكس" dir="rtl">
@@ -970,7 +1203,7 @@
                     </div>
 
                     <div class="subsection">
-                        <h3>Room 3 (غرفة عائلية)</h3>
+                        <h3>Room 3</h3>
                         <div class="form-group">
                             <label>Room Name</label>
                             <input type="text" id="room3-title-ar" placeholder="غرفة عائلية" dir="rtl">
@@ -985,7 +1218,7 @@
 
             <!-- Amenities Section -->
             <div class="section-card" id="section-amenities">
-                <h2>✨ Amenities Section</h2>
+                <h2>Amenities Section</h2>
                 <p>Edit amenity labels for each language.</p>
 
                 <div class="lang-tabs">
@@ -1005,38 +1238,14 @@
                     </div>
                     <div class="subsection">
                         <h3>Amenity Labels</h3>
-                        <div class="form-group">
-                            <label>🏊 Pool</label>
-                            <input type="text" id="amenity1-en" placeholder="Private Pool">
-                        </div>
-                        <div class="form-group">
-                            <label>🌿 Garden</label>
-                            <input type="text" id="amenity2-en" placeholder="Tropical Garden">
-                        </div>
-                        <div class="form-group">
-                            <label>🍳 Kitchen</label>
-                            <input type="text" id="amenity3-en" placeholder="Full Kitchen">
-                        </div>
-                        <div class="form-group">
-                            <label>📶 WiFi</label>
-                            <input type="text" id="amenity4-en" placeholder="High-Speed WiFi">
-                        </div>
-                        <div class="form-group">
-                            <label>❄️ AC</label>
-                            <input type="text" id="amenity5-en" placeholder="Air Conditioning">
-                        </div>
-                        <div class="form-group">
-                            <label>🚗 Parking</label>
-                            <input type="text" id="amenity6-en" placeholder="Free Parking">
-                        </div>
-                        <div class="form-group">
-                            <label>🛎️ Service</label>
-                            <input type="text" id="amenity7-en" placeholder="24/7 Service">
-                        </div>
-                        <div class="form-group">
-                            <label>🏖️ Beach</label>
-                            <input type="text" id="amenity8-en" placeholder="Beach Access">
-                        </div>
+                        <div class="form-group"><label>🏊 Amenity 1</label><input type="text" id="amenity1-en" placeholder="Private Pool"></div>
+                        <div class="form-group"><label>🌿 Amenity 2</label><input type="text" id="amenity2-en" placeholder="Tropical Garden"></div>
+                        <div class="form-group"><label>🍳 Amenity 3</label><input type="text" id="amenity3-en" placeholder="Full Kitchen"></div>
+                        <div class="form-group"><label>📶 Amenity 4</label><input type="text" id="amenity4-en" placeholder="High-Speed WiFi"></div>
+                        <div class="form-group"><label>❄️ Amenity 5</label><input type="text" id="amenity5-en" placeholder="Air Conditioning"></div>
+                        <div class="form-group"><label>🚗 Amenity 6</label><input type="text" id="amenity6-en" placeholder="Free Parking"></div>
+                        <div class="form-group"><label>🛎️ Amenity 7</label><input type="text" id="amenity7-en" placeholder="24/7 Service"></div>
+                        <div class="form-group"><label>🏖️ Amenity 8</label><input type="text" id="amenity8-en" placeholder="Beach Access"></div>
                     </div>
                 </div>
 
@@ -1051,38 +1260,14 @@
                     </div>
                     <div class="subsection">
                         <h3>Label Fasilitas</h3>
-                        <div class="form-group">
-                            <label>🏊 Pool</label>
-                            <input type="text" id="amenity1-id" placeholder="Kolam Renang Pribadi">
-                        </div>
-                        <div class="form-group">
-                            <label>🌿 Garden</label>
-                            <input type="text" id="amenity2-id" placeholder="Taman Tropis">
-                        </div>
-                        <div class="form-group">
-                            <label>🍳 Kitchen</label>
-                            <input type="text" id="amenity3-id" placeholder="Dapur Lengkap">
-                        </div>
-                        <div class="form-group">
-                            <label>📶 WiFi</label>
-                            <input type="text" id="amenity4-id" placeholder="WiFi Kecepatan Tinggi">
-                        </div>
-                        <div class="form-group">
-                            <label>❄️ AC</label>
-                            <input type="text" id="amenity5-id" placeholder="AC">
-                        </div>
-                        <div class="form-group">
-                            <label>🚗 Parking</label>
-                            <input type="text" id="amenity6-id" placeholder="Parkir Gratis">
-                        </div>
-                        <div class="form-group">
-                            <label>🛎️ Service</label>
-                            <input type="text" id="amenity7-id" placeholder="Layanan 24/7">
-                        </div>
-                        <div class="form-group">
-                            <label>🏖️ Beach</label>
-                            <input type="text" id="amenity8-id" placeholder="Akses Pantai">
-                        </div>
+                        <div class="form-group"><label>🏊 Amenity 1</label><input type="text" id="amenity1-id" placeholder="Kolam Renang Pribadi"></div>
+                        <div class="form-group"><label>🌿 Amenity 2</label><input type="text" id="amenity2-id" placeholder="Taman Tropis"></div>
+                        <div class="form-group"><label>🍳 Amenity 3</label><input type="text" id="amenity3-id" placeholder="Dapur Lengkap"></div>
+                        <div class="form-group"><label>📶 Amenity 4</label><input type="text" id="amenity4-id" placeholder="WiFi Kecepatan Tinggi"></div>
+                        <div class="form-group"><label>❄️ Amenity 5</label><input type="text" id="amenity5-id" placeholder="AC"></div>
+                        <div class="form-group"><label>🚗 Amenity 6</label><input type="text" id="amenity6-id" placeholder="Parkir Gratis"></div>
+                        <div class="form-group"><label>🛎️ Amenity 7</label><input type="text" id="amenity7-id" placeholder="Layanan 24/7"></div>
+                        <div class="form-group"><label>🏖️ Amenity 8</label><input type="text" id="amenity8-id" placeholder="Akses Pantai"></div>
                     </div>
                 </div>
 
@@ -1097,45 +1282,21 @@
                     </div>
                     <div class="subsection">
                         <h3>تسميات المرافق</h3>
-                        <div class="form-group">
-                            <label>🏊 Pool</label>
-                            <input type="text" id="amenity1-ar" placeholder="مسبح خاص" dir="rtl">
-                        </div>
-                        <div class="form-group">
-                            <label>🌿 Garden</label>
-                            <input type="text" id="amenity2-ar" placeholder="حديقة استوائية" dir="rtl">
-                        </div>
-                        <div class="form-group">
-                            <label>🍳 Kitchen</label>
-                            <input type="text" id="amenity3-ar" placeholder="مطبخ كامل" dir="rtl">
-                        </div>
-                        <div class="form-group">
-                            <label>📶 WiFi</label>
-                            <input type="text" id="amenity4-ar" placeholder="واي فاي عالي السرعة" dir="rtl">
-                        </div>
-                        <div class="form-group">
-                            <label>❄️ AC</label>
-                            <input type="text" id="amenity5-ar" placeholder="تكييف" dir="rtl">
-                        </div>
-                        <div class="form-group">
-                            <label>🚗 Parking</label>
-                            <input type="text" id="amenity6-ar" placeholder="موقف مجاني" dir="rtl">
-                        </div>
-                        <div class="form-group">
-                            <label>🛎️ Service</label>
-                            <input type="text" id="amenity7-ar" placeholder="خدمة 24/7" dir="rtl">
-                        </div>
-                        <div class="form-group">
-                            <label>🏖️ Beach</label>
-                            <input type="text" id="amenity8-ar" placeholder="وصول للشاطئ" dir="rtl">
-                        </div>
+                        <div class="form-group"><label>🏊 Amenity 1</label><input type="text" id="amenity1-ar" placeholder="مسبح خاص" dir="rtl"></div>
+                        <div class="form-group"><label>🌿 Amenity 2</label><input type="text" id="amenity2-ar" placeholder="حديقة استوائية" dir="rtl"></div>
+                        <div class="form-group"><label>🍳 Amenity 3</label><input type="text" id="amenity3-ar" placeholder="مطبخ كامل" dir="rtl"></div>
+                        <div class="form-group"><label>📶 Amenity 4</label><input type="text" id="amenity4-ar" placeholder="واي فاي عالي السرعة" dir="rtl"></div>
+                        <div class="form-group"><label>❄️ Amenity 5</label><input type="text" id="amenity5-ar" placeholder="تكييف" dir="rtl"></div>
+                        <div class="form-group"><label>🚗 Amenity 6</label><input type="text" id="amenity6-ar" placeholder="موقف مجاني" dir="rtl"></div>
+                        <div class="form-group"><label>🛎️ Amenity 7</label><input type="text" id="amenity7-ar" placeholder="خدمة 24/7" dir="rtl"></div>
+                        <div class="form-group"><label>🏖️ Amenity 8</label><input type="text" id="amenity8-ar" placeholder="وصول للشاطئ" dir="rtl"></div>
                     </div>
                 </div>
             </div>
 
             <!-- Location Section -->
             <div class="section-card" id="section-location">
-                <h2>📍 Location Section</h2>
+                <h2>Location Section</h2>
                 <p>Edit your location and directions information.</p>
 
                 <div class="lang-tabs">
@@ -1145,90 +1306,39 @@
                 </div>
 
                 <div class="lang-content active" data-lang="en">
-                    <div class="form-group">
-                        <label>Section Title</label>
-                        <input type="text" id="location-title-en" placeholder="How to Get Here">
-                    </div>
-                    <div class="form-group">
-                        <label>Section Subtitle</label>
-                        <input type="text" id="location-subtitle-en" placeholder="Find us at our convenient location">
-                    </div>
-                    <div class="form-group">
-                        <label>Full Address</label>
-                        <textarea id="location-address-en" placeholder="123 Paradise Lane, Beach Town..."></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Airport Distance</label>
-                        <input type="text" id="location-airport-en" placeholder="30 minutes from International Airport">
-                    </div>
-                    <div class="form-group">
-                        <label>City Center Distance</label>
-                        <input type="text" id="location-city-en" placeholder="15 minutes drive from city center">
-                    </div>
-                    <div class="form-group">
-                        <label>Beach Distance</label>
-                        <input type="text" id="location-beach-en" placeholder="5 minutes walk to the beach">
-                    </div>
+                    <div class="form-group"><label>Section Title</label><input type="text" id="location-title-en" placeholder="How to Get Here"></div>
+                    <div class="form-group"><label>Section Subtitle</label><input type="text" id="location-subtitle-en" placeholder="Find us at our convenient location"></div>
+                    <div class="form-group"><label>Address Title</label><input type="text" id="location-addressTitle-en" placeholder="Our Address"></div>
+                    <div class="form-group"><label>Full Address</label><textarea id="location-address-en" placeholder="123 Paradise Lane, Beach Town..."></textarea></div>
+                    <div class="form-group"><label>Airport Distance</label><input type="text" id="location-airport-en" placeholder="30 minutes from International Airport"></div>
+                    <div class="form-group"><label>City Center Distance</label><input type="text" id="location-city-en" placeholder="15 minutes drive from city center"></div>
+                    <div class="form-group"><label>Beach Distance</label><input type="text" id="location-beach-en" placeholder="5 minutes walk to the beach"></div>
                 </div>
 
                 <div class="lang-content" data-lang="id">
-                    <div class="form-group">
-                        <label>Section Title</label>
-                        <input type="text" id="location-title-id" placeholder="Cara Menuju Ke Sini">
-                    </div>
-                    <div class="form-group">
-                        <label>Section Subtitle</label>
-                        <input type="text" id="location-subtitle-id" placeholder="Temukan kami di lokasi yang nyaman">
-                    </div>
-                    <div class="form-group">
-                        <label>Full Address</label>
-                        <textarea id="location-address-id" placeholder="Jl. Paradise No. 123..."></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Airport Distance</label>
-                        <input type="text" id="location-airport-id" placeholder="30 menit dari Bandara Internasional">
-                    </div>
-                    <div class="form-group">
-                        <label>City Center Distance</label>
-                        <input type="text" id="location-city-id" placeholder="15 menit berkendara dari pusat kota">
-                    </div>
-                    <div class="form-group">
-                        <label>Beach Distance</label>
-                        <input type="text" id="location-beach-id" placeholder="5 menit berjalan kaki ke pantai">
-                    </div>
+                    <div class="form-group"><label>Section Title</label><input type="text" id="location-title-id" placeholder="Cara Menuju Ke Sini"></div>
+                    <div class="form-group"><label>Section Subtitle</label><input type="text" id="location-subtitle-id" placeholder="Temukan kami di lokasi yang nyaman"></div>
+                    <div class="form-group"><label>Address Title</label><input type="text" id="location-addressTitle-id" placeholder="Alamat Kami"></div>
+                    <div class="form-group"><label>Full Address</label><textarea id="location-address-id" placeholder="Jl. Paradise No. 123..."></textarea></div>
+                    <div class="form-group"><label>Airport Distance</label><input type="text" id="location-airport-id" placeholder="30 menit dari Bandara Internasional"></div>
+                    <div class="form-group"><label>City Center Distance</label><input type="text" id="location-city-id" placeholder="15 menit berkendara dari pusat kota"></div>
+                    <div class="form-group"><label>Beach Distance</label><input type="text" id="location-beach-id" placeholder="5 menit berjalan kaki ke pantai"></div>
                 </div>
 
                 <div class="lang-content" data-lang="ar">
-                    <div class="form-group">
-                        <label>Section Title</label>
-                        <input type="text" id="location-title-ar" placeholder="كيفية الوصول" dir="rtl">
-                    </div>
-                    <div class="form-group">
-                        <label>Section Subtitle</label>
-                        <input type="text" id="location-subtitle-ar" placeholder="تجدنا في موقعنا المريح" dir="rtl">
-                    </div>
-                    <div class="form-group">
-                        <label>Full Address</label>
-                        <textarea id="location-address-ar" placeholder="123 شارع الجنة..." dir="rtl"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Airport Distance</label>
-                        <input type="text" id="location-airport-ar" placeholder="30 دقيقة من المطار الدولي" dir="rtl">
-                    </div>
-                    <div class="form-group">
-                        <label>City Center Distance</label>
-                        <input type="text" id="location-city-ar" placeholder="15 دقيقة بالسيارة من وسط المدينة" dir="rtl">
-                    </div>
-                    <div class="form-group">
-                        <label>Beach Distance</label>
-                        <input type="text" id="location-beach-ar" placeholder="5 دقائق سيراً على الأقدام إلى الشاطئ" dir="rtl">
-                    </div>
+                    <div class="form-group"><label>Section Title</label><input type="text" id="location-title-ar" placeholder="كيفية الوصول" dir="rtl"></div>
+                    <div class="form-group"><label>Section Subtitle</label><input type="text" id="location-subtitle-ar" placeholder="تجدنا في موقعنا المريح" dir="rtl"></div>
+                    <div class="form-group"><label>Address Title</label><input type="text" id="location-addressTitle-ar" placeholder="عنواننا" dir="rtl"></div>
+                    <div class="form-group"><label>Full Address</label><textarea id="location-address-ar" placeholder="123 شارع الجنة..." dir="rtl"></textarea></div>
+                    <div class="form-group"><label>Airport Distance</label><input type="text" id="location-airport-ar" placeholder="30 دقيقة من المطار الدولي" dir="rtl"></div>
+                    <div class="form-group"><label>City Center Distance</label><input type="text" id="location-city-ar" placeholder="15 دقيقة بالسيارة من وسط المدينة" dir="rtl"></div>
+                    <div class="form-group"><label>Beach Distance</label><input type="text" id="location-beach-ar" placeholder="5 دقائق سيراً على الأقدام إلى الشاطئ" dir="rtl"></div>
                 </div>
             </div>
 
             <!-- Contact Section -->
             <div class="section-card" id="section-contact">
-                <h2>📞 Contact Info</h2>
+                <h2>Contact Info</h2>
                 <p>Configure contact section details.</p>
 
                 <div class="lang-tabs">
@@ -1238,66 +1348,65 @@
                 </div>
 
                 <div class="lang-content active" data-lang="en">
-                    <div class="form-group">
-                        <label>Section Title</label>
-                        <input type="text" id="contact-title-en" placeholder="Contact Us">
-                    </div>
-                    <div class="form-group">
-                        <label>Section Subtitle</label>
-                        <input type="text" id="contact-subtitle-en" placeholder="Get in touch for reservations">
-                    </div>
-                    <div class="form-group">
-                        <label>Check-in/Check-out Hours</label>
-                        <input type="text" id="contact-hours-en" placeholder="Check-in: 2PM | Check-out: 12PM">
-                    </div>
+                    <div class="form-group"><label>Section Title</label><input type="text" id="contact-title-en" placeholder="Contact Us"></div>
+                    <div class="form-group"><label>Section Subtitle</label><input type="text" id="contact-subtitle-en" placeholder="Get in touch for reservations"></div>
+                    <div class="form-group"><label>Info Box Title</label><input type="text" id="contact-infoTitle-en" placeholder="Get In Touch"></div>
+                    <div class="form-group"><label>Check-in/Check-out Hours</label><input type="text" id="contact-hours-en" placeholder="Check-in: 2PM | Check-out: 12PM"></div>
                 </div>
 
                 <div class="lang-content" data-lang="id">
-                    <div class="form-group">
-                        <label>Section Title</label>
-                        <input type="text" id="contact-title-id" placeholder="Hubungi Kami">
-                    </div>
-                    <div class="form-group">
-                        <label>Section Subtitle</label>
-                        <input type="text" id="contact-subtitle-id" placeholder="Hubungi untuk reservasi">
-                    </div>
-                    <div class="form-group">
-                        <label>Check-in/Check-out Hours</label>
-                        <input type="text" id="contact-hours-id" placeholder="Check-in: 14:00 | Check-out: 12:00">
-                    </div>
+                    <div class="form-group"><label>Section Title</label><input type="text" id="contact-title-id" placeholder="Hubungi Kami"></div>
+                    <div class="form-group"><label>Section Subtitle</label><input type="text" id="contact-subtitle-id" placeholder="Hubungi untuk reservasi"></div>
+                    <div class="form-group"><label>Info Box Title</label><input type="text" id="contact-infoTitle-id" placeholder="Hubungi Kami"></div>
+                    <div class="form-group"><label>Check-in/Check-out Hours</label><input type="text" id="contact-hours-id" placeholder="Check-in: 14:00 | Check-out: 12:00"></div>
                 </div>
 
                 <div class="lang-content" data-lang="ar">
-                    <div class="form-group">
-                        <label>Section Title</label>
-                        <input type="text" id="contact-title-ar" placeholder="اتصل بنا" dir="rtl">
-                    </div>
-                    <div class="form-group">
-                        <label>Section Subtitle</label>
-                        <input type="text" id="contact-subtitle-ar" placeholder="تواصل معنا للحجوزات" dir="rtl">
-                    </div>
-                    <div class="form-group">
-                        <label>Check-in/Check-out Hours</label>
-                        <input type="text" id="contact-hours-ar" placeholder="تسجيل الوصول: 2م | تسجيل المغادرة: 12ظ" dir="rtl">
-                    </div>
+                    <div class="form-group"><label>Section Title</label><input type="text" id="contact-title-ar" placeholder="اتصل بنا" dir="rtl"></div>
+                    <div class="form-group"><label>Section Subtitle</label><input type="text" id="contact-subtitle-ar" placeholder="تواصل معنا للحجوزات" dir="rtl"></div>
+                    <div class="form-group"><label>Info Box Title</label><input type="text" id="contact-infoTitle-ar" placeholder="تواصل معنا" dir="rtl"></div>
+                    <div class="form-group"><label>Check-in/Check-out Hours</label><input type="text" id="contact-hours-ar" placeholder="تسجيل الوصول: 2م | تسجيل المغادرة: 12ظ" dir="rtl"></div>
                 </div>
             </div>
 
-            <!-- Export/Import Section -->
+            <!-- Export Section -->
             <div class="section-card" id="section-export">
-                <h2>📤 Export / Import Data</h2>
-                <p>Backup your content or transfer it to another device.</p>
+                <h2>Export Files</h2>
+                <p>Download all files needed for your website.</p>
 
-                <div class="export-import">
-                    <button class="btn btn-success" onclick="exportData()">📥 Export Data (JSON)</button>
-                    <button class="btn btn-secondary" onclick="document.getElementById('import-file').click()">📤 Import Data</button>
-                    <input type="file" id="import-file" accept=".json" style="display:none" onchange="importData(event)">
-                    <button class="btn btn-danger" onclick="clearAllData()">🗑️ Clear All Data</button>
+                <div class="export-actions">
+                    <button class="btn btn-success" onclick="exportContentJSON()">Download content.json</button>
+                    <button class="btn btn-info" onclick="downloadAllImages()">Download All Images</button>
+                    <button class="btn btn-secondary" onclick="loadExistingContent()">Load Existing content.json</button>
+                    <input type="file" id="load-content-file" accept=".json" style="display:none" onchange="handleContentLoad(event)">
                 </div>
 
-                <div class="file-info">
-                    <p><strong>Note:</strong> Images are stored as base64 in localStorage. Large images may cause performance issues.</p>
-                    <p>For production use, consider hosting images separately and using URLs instead.</p>
+                <div class="file-list">
+                    <h4>Required Files for Deployment</h4>
+                    <div class="file-item">
+                        <span class="file-name">content.json</span>
+                        <span class="file-status ready" id="status-content">Ready to export</span>
+                    </div>
+                    <div class="file-item">
+                        <span class="file-name">images/hero.jpg</span>
+                        <span class="file-status" id="status-hero">Not uploaded</span>
+                    </div>
+                    <div class="file-item">
+                        <span class="file-name">images/about.jpg</span>
+                        <span class="file-status" id="status-about">Not uploaded</span>
+                    </div>
+                    <div class="file-item">
+                        <span class="file-name">images/room1.jpg, room2.jpg, room3.jpg</span>
+                        <span class="file-status" id="status-rooms">Not uploaded</span>
+                    </div>
+                    <div class="file-item">
+                        <span class="file-name">images/gallery1-6.jpg</span>
+                        <span class="file-status" id="status-gallery">Not uploaded</span>
+                    </div>
+                    <div class="file-item">
+                        <span class="file-name">images/map.jpg</span>
+                        <span class="file-status" id="status-map">Not uploaded</span>
+                    </div>
                 </div>
             </div>
         </main>
@@ -1307,15 +1416,16 @@
     <div class="toast" id="toast">Changes saved successfully!</div>
 
     <script>
-        // Storage key
-        const STORAGE_KEY = 'villa-cms-data';
+        // Storage for uploaded images (base64)
+        const uploadedImages = {};
 
         // Initialize CMS
         document.addEventListener('DOMContentLoaded', () => {
-            loadSavedData();
             initializeNavigation();
             initializeImageUploads();
             initializeLangTabs();
+            loadFromLocalStorage();
+            updateFileStatuses();
         });
 
         // Navigation
@@ -1325,11 +1435,9 @@
                     e.preventDefault();
                     const section = link.dataset.section;
                     
-                    // Update active link
                     document.querySelectorAll('.sidebar-nav a').forEach(l => l.classList.remove('active'));
                     link.classList.add('active');
                     
-                    // Show section
                     document.querySelectorAll('.section-card').forEach(s => s.classList.remove('active'));
                     document.getElementById(`section-${section}`).classList.add('active');
                 });
@@ -1366,15 +1474,14 @@
                 const input = area.querySelector('input[type="file"]');
                 const preview = area.querySelector('.image-preview');
                 const imageKey = area.dataset.image;
+                const filename = area.dataset.filename;
 
-                // Click to upload
                 area.addEventListener('click', (e) => {
                     if (e.target.tagName !== 'BUTTON') {
                         input.click();
                     }
                 });
 
-                // Drag and drop
                 area.addEventListener('dragover', (e) => {
                     e.preventDefault();
                     area.classList.add('dragover');
@@ -1389,38 +1496,39 @@
                     area.classList.remove('dragover');
                     const file = e.dataTransfer.files[0];
                     if (file && file.type.startsWith('image/')) {
-                        handleImageUpload(file, imageKey, preview, area);
+                        handleImageUpload(file, imageKey, filename, preview, area);
                     }
                 });
 
-                // File input change
                 input.addEventListener('change', (e) => {
                     const file = e.target.files[0];
                     if (file) {
-                        handleImageUpload(file, imageKey, preview, area);
+                        handleImageUpload(file, imageKey, filename, preview, area);
                     }
                 });
             });
         }
 
-        function handleImageUpload(file, imageKey, preview, area) {
+        function handleImageUpload(file, imageKey, filename, preview, area) {
             const reader = new FileReader();
             reader.onload = (e) => {
                 const base64 = e.target.result;
+                uploadedImages[imageKey] = { base64, filename };
                 
-                // Update preview
                 preview.innerHTML = `
                     <img src="${base64}" alt="Preview">
                     <button class="remove-btn" onclick="removeImage('${imageKey}', event)">×</button>
+                    <div class="image-actions">
+                        <button class="btn btn-info" onclick="downloadImage('${imageKey}', event)">Download as ${filename}</button>
+                    </div>
                 `;
                 
-                // Hide upload UI
                 area.querySelector('.upload-icon').style.display = 'none';
                 area.querySelector('p').style.display = 'none';
                 
-                // Save to storage
-                saveImageToStorage(imageKey, base64);
-                showToast('Image uploaded successfully!');
+                saveToLocalStorage();
+                updateFileStatuses();
+                showToast(`Image uploaded: ${filename}`);
             };
             reader.readAsDataURL(file);
         }
@@ -1434,127 +1542,359 @@
             area.querySelector('.upload-icon').style.display = '';
             area.querySelector('p').style.display = '';
             
-            // Remove from storage
-            const data = getStorageData();
-            delete data.images[imageKey];
-            saveStorageData(data);
-            
+            delete uploadedImages[imageKey];
+            saveToLocalStorage();
+            updateFileStatuses();
             showToast('Image removed');
         }
 
-        function saveImageToStorage(key, base64) {
-            const data = getStorageData();
-            if (!data.images) data.images = {};
-            data.images[key] = base64;
-            saveStorageData(data);
-        }
-
-        // Storage functions
-        function getStorageData() {
-            const stored = localStorage.getItem(STORAGE_KEY);
-            return stored ? JSON.parse(stored) : { images: {}, content: {} };
-        }
-
-        function saveStorageData(data) {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-        }
-
-        // Save all text content
-        function saveAllChanges() {
-            const data = getStorageData();
+        function downloadImage(imageKey, event) {
+            event.stopPropagation();
+            const imageData = uploadedImages[imageKey];
+            if (!imageData) return;
             
-            // General settings
-            data.content.villaName = document.getElementById('villa-name').value;
-            data.content.whatsappNumber = document.getElementById('whatsapp-number').value;
-            data.content.whatsappMessage = document.getElementById('whatsapp-message').value;
-            data.content.phoneNumber = document.getElementById('phone-number').value;
-            data.content.emailAddress = document.getElementById('email-address').value;
+            const link = document.createElement('a');
+            link.href = imageData.base64;
+            link.download = imageData.filename;
+            link.click();
+            showToast(`Downloaded: ${imageData.filename}`);
+        }
 
-            // Collect all input/textarea values
-            document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], input[type="url"], textarea').forEach(input => {
-                if (input.id && !['import-file'].includes(input.id)) {
-                    data.content[input.id] = input.value;
+        function downloadAllImages() {
+            const keys = Object.keys(uploadedImages);
+            if (keys.length === 0) {
+                alert('No images uploaded yet. Please upload images first.');
+                return;
+            }
+            
+            keys.forEach((key, index) => {
+                setTimeout(() => {
+                    const imageData = uploadedImages[key];
+                    const link = document.createElement('a');
+                    link.href = imageData.base64;
+                    link.download = imageData.filename;
+                    link.click();
+                }, index * 500);
+            });
+            
+            showToast(`Downloading ${keys.length} images...`);
+        }
+
+        // Build content.json from form data
+        function buildContentJSON() {
+            const getValue = (id) => document.getElementById(id)?.value || '';
+            
+            return {
+                settings: {
+                    villaName: getValue('villaName') || 'Villa Paradise',
+                    whatsappNumber: getValue('whatsappNumber') || '+6281234567890',
+                    whatsappMessage: getValue('whatsappMessage') || 'Hello! I would like to book a stay.',
+                    phoneNumber: getValue('phoneNumber') || '+62 812 3456 7890',
+                    emailAddress: getValue('emailAddress') || 'info@villaparadise.com'
+                },
+                images: {
+                    hero: 'images/hero.jpg',
+                    about: 'images/about.jpg',
+                    room1: 'images/room1.jpg',
+                    room2: 'images/room2.jpg',
+                    room3: 'images/room3.jpg',
+                    gallery1: 'images/gallery1.jpg',
+                    gallery2: 'images/gallery2.jpg',
+                    gallery3: 'images/gallery3.jpg',
+                    gallery4: 'images/gallery4.jpg',
+                    gallery5: 'images/gallery5.jpg',
+                    gallery6: 'images/gallery6.jpg',
+                    map: 'images/map.jpg'
+                },
+                content: {
+                    en: buildLanguageContent('en'),
+                    id: buildLanguageContent('id'),
+                    ar: buildLanguageContent('ar')
+                }
+            };
+        }
+
+        function buildLanguageContent(lang) {
+            const getValue = (id) => document.getElementById(id)?.value || '';
+            
+            return {
+                logo: getValue('villaName') || 'Villa Paradise',
+                nav: {
+                    home: lang === 'id' ? 'Beranda' : lang === 'ar' ? 'الرئيسية' : 'Home',
+                    about: lang === 'id' ? 'Tentang' : lang === 'ar' ? 'عنا' : 'About',
+                    rooms: lang === 'id' ? 'Kamar' : lang === 'ar' ? 'الغرف' : 'Rooms',
+                    amenities: lang === 'id' ? 'Fasilitas' : lang === 'ar' ? 'المرافق' : 'Amenities',
+                    gallery: lang === 'id' ? 'Galeri' : lang === 'ar' ? 'المعرض' : 'Gallery',
+                    location: lang === 'id' ? 'Lokasi' : lang === 'ar' ? 'الموقع' : 'Location',
+                    contact: lang === 'id' ? 'Kontak' : lang === 'ar' ? 'اتصل بنا' : 'Contact'
+                },
+                hero: {
+                    title: getValue(`hero-title-${lang}`) || (lang === 'id' ? 'Selamat Datang di Surga' : lang === 'ar' ? 'مرحباً بكم في الجنة' : 'Welcome to Paradise'),
+                    subtitle: getValue(`hero-subtitle-${lang}`) || '',
+                    cta: getValue(`hero-cta-${lang}`) || (lang === 'id' ? 'Pesan Sekarang' : lang === 'ar' ? 'احجز إقامتك' : 'Book Your Stay')
+                },
+                about: {
+                    title: getValue(`about-title-${lang}`) || '',
+                    subtitle: getValue(`about-subtitle-${lang}`) || '',
+                    heading: getValue(`about-heading-${lang}`) || '',
+                    p1: getValue(`about-p1-${lang}`) || '',
+                    p2: getValue(`about-p2-${lang}`) || '',
+                    p3: getValue(`about-p3-${lang}`) || ''
+                },
+                rooms: {
+                    title: getValue(`rooms-title-${lang}`) || '',
+                    subtitle: getValue(`rooms-subtitle-${lang}`) || '',
+                    room1: {
+                        title: getValue(`room1-title-${lang}`) || '',
+                        desc: getValue(`room1-desc-${lang}`) || ''
+                    },
+                    room2: {
+                        title: getValue(`room2-title-${lang}`) || '',
+                        desc: getValue(`room2-desc-${lang}`) || ''
+                    },
+                    room3: {
+                        title: getValue(`room3-title-${lang}`) || '',
+                        desc: getValue(`room3-desc-${lang}`) || ''
+                    }
+                },
+                amenities: {
+                    title: getValue(`amenities-title-${lang}`) || '',
+                    subtitle: getValue(`amenities-subtitle-${lang}`) || '',
+                    items: [
+                        getValue(`amenity1-${lang}`) || '',
+                        getValue(`amenity2-${lang}`) || '',
+                        getValue(`amenity3-${lang}`) || '',
+                        getValue(`amenity4-${lang}`) || '',
+                        getValue(`amenity5-${lang}`) || '',
+                        getValue(`amenity6-${lang}`) || '',
+                        getValue(`amenity7-${lang}`) || '',
+                        getValue(`amenity8-${lang}`) || ''
+                    ]
+                },
+                gallery: {
+                    title: lang === 'id' ? 'Galeri Foto' : lang === 'ar' ? 'معرض الصور' : 'Photo Gallery',
+                    subtitle: lang === 'id' ? 'Lihat tur visual villa indah kami' : lang === 'ar' ? 'جولة بصرية في فيلتنا الجميلة' : 'Take a visual tour of our beautiful villa'
+                },
+                location: {
+                    title: getValue(`location-title-${lang}`) || '',
+                    subtitle: getValue(`location-subtitle-${lang}`) || '',
+                    addressTitle: getValue(`location-addressTitle-${lang}`) || '',
+                    address: getValue(`location-address-${lang}`) || '',
+                    airport: getValue(`location-airport-${lang}`) || '',
+                    city: getValue(`location-city-${lang}`) || '',
+                    beach: getValue(`location-beach-${lang}`) || ''
+                },
+                contact: {
+                    title: getValue(`contact-title-${lang}`) || '',
+                    subtitle: getValue(`contact-subtitle-${lang}`) || '',
+                    infoTitle: getValue(`contact-infoTitle-${lang}`) || '',
+                    hours: getValue(`contact-hours-${lang}`) || '',
+                    form: {
+                        name: lang === 'id' ? 'Nama Anda' : lang === 'ar' ? 'اسمك' : 'Your Name',
+                        email: lang === 'id' ? 'Email Anda' : lang === 'ar' ? 'بريدك الإلكتروني' : 'Your Email',
+                        phone: lang === 'id' ? 'Telepon Anda' : lang === 'ar' ? 'هاتفك' : 'Your Phone',
+                        dates: lang === 'id' ? 'Tanggal Check-in - Check-out' : lang === 'ar' ? 'تاريخ الوصول - المغادرة' : 'Check-in - Check-out Date',
+                        message: lang === 'id' ? 'Pesan Anda' : lang === 'ar' ? 'رسالتك' : 'Your Message',
+                        submit: lang === 'id' ? 'Kirim Pesan' : lang === 'ar' ? 'إرسال الرسالة' : 'Send Message'
+                    }
+                },
+                footer: {
+                    copyright: `© ${new Date().getFullYear()} ${getValue('villaName') || 'Villa Paradise'}. ${lang === 'id' ? 'Hak cipta dilindungi.' : lang === 'ar' ? 'جميع الحقوق محفوظة.' : 'All rights reserved.'}`
+                },
+                whatsapp: {
+                    text: lang === 'id' ? 'Pesan Sekarang!' : lang === 'ar' ? 'احجز الآن!' : 'Book Now!'
+                }
+            };
+        }
+
+        // Export content.json
+        function exportContentJSON() {
+            const content = buildContentJSON();
+            const blob = new Blob([JSON.stringify(content, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'content.json';
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast('content.json downloaded!');
+        }
+
+        // Load existing content.json
+        function loadExistingContent() {
+            document.getElementById('load-content-file').click();
+        }
+
+        function handleContentLoad(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    populateFormFromContent(data);
+                    showToast('Content loaded successfully!');
+                } catch (err) {
+                    alert('Invalid JSON file');
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function populateFormFromContent(data) {
+            // Settings
+            if (data.settings) {
+                document.getElementById('villaName').value = data.settings.villaName || '';
+                document.getElementById('whatsappNumber').value = data.settings.whatsappNumber || '';
+                document.getElementById('whatsappMessage').value = data.settings.whatsappMessage || '';
+                document.getElementById('phoneNumber').value = data.settings.phoneNumber || '';
+                document.getElementById('emailAddress').value = data.settings.emailAddress || '';
+            }
+            
+            // Content for each language
+            ['en', 'id', 'ar'].forEach(lang => {
+                if (data.content && data.content[lang]) {
+                    const c = data.content[lang];
+                    
+                    // Hero
+                    if (c.hero) {
+                        setFieldValue(`hero-title-${lang}`, c.hero.title);
+                        setFieldValue(`hero-subtitle-${lang}`, c.hero.subtitle);
+                        setFieldValue(`hero-cta-${lang}`, c.hero.cta);
+                    }
+                    
+                    // About
+                    if (c.about) {
+                        setFieldValue(`about-title-${lang}`, c.about.title);
+                        setFieldValue(`about-subtitle-${lang}`, c.about.subtitle);
+                        setFieldValue(`about-heading-${lang}`, c.about.heading);
+                        setFieldValue(`about-p1-${lang}`, c.about.p1);
+                        setFieldValue(`about-p2-${lang}`, c.about.p2);
+                        setFieldValue(`about-p3-${lang}`, c.about.p3);
+                    }
+                    
+                    // Rooms
+                    if (c.rooms) {
+                        setFieldValue(`rooms-title-${lang}`, c.rooms.title);
+                        setFieldValue(`rooms-subtitle-${lang}`, c.rooms.subtitle);
+                        if (c.rooms.room1) {
+                            setFieldValue(`room1-title-${lang}`, c.rooms.room1.title);
+                            setFieldValue(`room1-desc-${lang}`, c.rooms.room1.desc);
+                        }
+                        if (c.rooms.room2) {
+                            setFieldValue(`room2-title-${lang}`, c.rooms.room2.title);
+                            setFieldValue(`room2-desc-${lang}`, c.rooms.room2.desc);
+                        }
+                        if (c.rooms.room3) {
+                            setFieldValue(`room3-title-${lang}`, c.rooms.room3.title);
+                            setFieldValue(`room3-desc-${lang}`, c.rooms.room3.desc);
+                        }
+                    }
+                    
+                    // Amenities
+                    if (c.amenities) {
+                        setFieldValue(`amenities-title-${lang}`, c.amenities.title);
+                        setFieldValue(`amenities-subtitle-${lang}`, c.amenities.subtitle);
+                        if (c.amenities.items) {
+                            c.amenities.items.forEach((item, i) => {
+                                setFieldValue(`amenity${i + 1}-${lang}`, item);
+                            });
+                        }
+                    }
+                    
+                    // Location
+                    if (c.location) {
+                        setFieldValue(`location-title-${lang}`, c.location.title);
+                        setFieldValue(`location-subtitle-${lang}`, c.location.subtitle);
+                        setFieldValue(`location-addressTitle-${lang}`, c.location.addressTitle);
+                        setFieldValue(`location-address-${lang}`, c.location.address);
+                        setFieldValue(`location-airport-${lang}`, c.location.airport);
+                        setFieldValue(`location-city-${lang}`, c.location.city);
+                        setFieldValue(`location-beach-${lang}`, c.location.beach);
+                    }
+                    
+                    // Contact
+                    if (c.contact) {
+                        setFieldValue(`contact-title-${lang}`, c.contact.title);
+                        setFieldValue(`contact-subtitle-${lang}`, c.contact.subtitle);
+                        setFieldValue(`contact-infoTitle-${lang}`, c.contact.infoTitle);
+                        setFieldValue(`contact-hours-${lang}`, c.contact.hours);
+                    }
                 }
             });
-
-            saveStorageData(data);
-            showToast('All changes saved successfully!');
         }
 
-        // Load saved data
-        function loadSavedData() {
-            const data = getStorageData();
+        function setFieldValue(id, value) {
+            const el = document.getElementById(id);
+            if (el && value) el.value = value;
+        }
 
+        // Local storage
+        function saveToLocalStorage() {
+            const formData = {};
+            document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], textarea').forEach(el => {
+                if (el.id) formData[el.id] = el.value;
+            });
+            localStorage.setItem('villa-cms-form', JSON.stringify(formData));
+            localStorage.setItem('villa-cms-images', JSON.stringify(uploadedImages));
+        }
+
+        function loadFromLocalStorage() {
+            // Load form data
+            const formData = JSON.parse(localStorage.getItem('villa-cms-form') || '{}');
+            Object.entries(formData).forEach(([id, value]) => {
+                const el = document.getElementById(id);
+                if (el) el.value = value;
+            });
+            
             // Load images
-            if (data.images) {
-                Object.entries(data.images).forEach(([key, base64]) => {
-                    const area = document.querySelector(`[data-image="${key}"]`);
-                    if (area) {
-                        const preview = area.querySelector('.image-preview');
-                        preview.innerHTML = `
-                            <img src="${base64}" alt="Preview">
-                            <button class="remove-btn" onclick="removeImage('${key}', event)">×</button>
-                        `;
-                        area.querySelector('.upload-icon').style.display = 'none';
-                        area.querySelector('p').style.display = 'none';
-                    }
-                });
-            }
+            const images = JSON.parse(localStorage.getItem('villa-cms-images') || '{}');
+            Object.entries(images).forEach(([key, data]) => {
+                uploadedImages[key] = data;
+                const area = document.querySelector(`[data-image="${key}"]`);
+                if (area) {
+                    const preview = area.querySelector('.image-preview');
+                    preview.innerHTML = `
+                        <img src="${data.base64}" alt="Preview">
+                        <button class="remove-btn" onclick="removeImage('${key}', event)">×</button>
+                        <div class="image-actions">
+                            <button class="btn btn-info" onclick="downloadImage('${key}', event)">Download as ${data.filename}</button>
+                        </div>
+                    `;
+                    area.querySelector('.upload-icon').style.display = 'none';
+                    area.querySelector('p').style.display = 'none';
+                }
+            });
+        }
 
-            // Load text content
-            if (data.content) {
-                Object.entries(data.content).forEach(([key, value]) => {
-                    const element = document.getElementById(key);
-                    if (element) {
-                        element.value = value;
-                    }
-                });
+        // Auto-save on input change
+        document.addEventListener('input', (e) => {
+            if (e.target.matches('input, textarea')) {
+                saveToLocalStorage();
             }
+        });
+
+        // Update file statuses
+        function updateFileStatuses() {
+            const setStatus = (id, hasImage) => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.textContent = hasImage ? 'Ready' : 'Not uploaded';
+                    el.className = `file-status ${hasImage ? 'ready' : 'missing'}`;
+                }
+            };
+            
+            setStatus('status-hero', !!uploadedImages.hero);
+            setStatus('status-about', !!uploadedImages.about);
+            setStatus('status-rooms', uploadedImages.room1 || uploadedImages.room2 || uploadedImages.room3);
+            setStatus('status-gallery', uploadedImages.gallery1 || uploadedImages.gallery2);
+            setStatus('status-map', !!uploadedImages.map);
         }
 
         // Preview site
         function previewSite() {
-            window.open('villa-landing-page.html', '_blank');
-        }
-
-        // Export data
-        function exportData() {
-            const data = getStorageData();
-            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `villa-cms-backup-${new Date().toISOString().split('T')[0]}.json`;
-            a.click();
-            URL.revokeObjectURL(url);
-            showToast('Data exported successfully!');
-        }
-
-        // Import data
-        function importData(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    try {
-                        const data = JSON.parse(e.target.result);
-                        saveStorageData(data);
-                        loadSavedData();
-                        showToast('Data imported successfully!');
-                    } catch (err) {
-                        alert('Invalid JSON file');
-                    }
-                };
-                reader.readAsText(file);
-            }
-        }
-
-        // Clear all data
-        function clearAllData() {
-            if (confirm('Are you sure you want to clear all data? This cannot be undone.')) {
-                localStorage.removeItem(STORAGE_KEY);
-                location.reload();
-            }
+            window.open('index.html', '_blank');
         }
 
         // Toast notification

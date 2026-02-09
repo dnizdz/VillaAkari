@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Villa Paradise - Luxury Getaway</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&family=Noto+Sans+Arabic:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a5f4a;
+            --secondary-color: #d4af37;
+            --text-dark: #2c3e50;
+            --text-light: #6c757d;
+            --bg-light: #f8f9fa;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        body[dir="rtl"] {
+            font-family: 'Noto Sans Arabic', 'Poppins', sans-serif;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .lang-switcher {
+            display: flex;
+            gap: 10px;
+        }
+
+        .lang-btn {
+            padding: 8px 15px;
+            border: 2px solid var(--primary-color);
+            background: transparent;
+            color: var(--primary-color);
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .lang-btn:hover, .lang-btn.active {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .mobile-menu-btn span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-color);
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4));
+            z-index: 1;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+        .img-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: rgba(255,255,255,0.8);
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .img-placeholder::before {
+            content: attr(data-label);
+            background: rgba(0,0,0,0.5);
+            padding: 10px 20px;
+            border-radius: 10px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--secondary-color);
+            color: var(--text-dark);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #c4a030;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 100px 5%;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto 60px;
+        }
+
+        /* About Section */
+        .about {
+            background: var(--bg-light);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-image {
+            position: relative;
+            height: 500px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .about-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .about-content p {
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+
+        /* Rooms/Facilities Section */
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .room-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .room-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .room-image {
+            height: 250px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .room-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .room-content {
+            padding: 25px;
+        }
+
+        .room-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .room-content p {
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+
+        /* Amenities Section */
+        .amenities {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .amenities .section-title {
+            color: var(--white);
+        }
+
+        .amenities .section-subtitle {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .amenities-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .amenity-item {
+            padding: 30px;
+        }
+
+        .amenity-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .amenity-item h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        /* Gallery Section */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            height: 250px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .gallery-item:nth-child(1),
+        .gallery-item:nth-child(6) {
+            grid-column: span 2;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Location Section */
+        .location {
+            background: var(--bg-light);
+        }
+
+        .location-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .map-container {
+            height: 400px;
+            background: #ddd;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .map-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .location-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .location-info ul {
+            list-style: none;
+        }
+
+        .location-info li {
+            padding: 15px 0;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .location-info li span {
+            font-size: 1.5rem;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            transition: border-color 0.3s;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .contact-form textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        .contact-info-box {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 40px;
+            border-radius: 20px;
+        }
+
+        .contact-info-box h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .contact-item span {
+            font-size: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            transition: background 0.3s;
+            cursor: pointer;
+        }
+
+        .social-link:hover {
+            background: var(--secondary-color);
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: var(--white);
+            text-align: center;
+            padding: 40px 5%;
+        }
+
+        footer p {
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25D366;
+            color: var(--white);
+            padding: 15px 25px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 5px 25px rgba(37, 211, 102, 0.4);
+            z-index: 999;
+            transition: all 0.3s;
+            animation: pulse 2s infinite;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 35px rgba(37, 211, 102, 0.5);
+        }
+
+        .whatsapp-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 5px 25px rgba(37, 211, 102, 0.4); }
+            50% { box-shadow: 0 5px 35px rgba(37, 211, 102, 0.6); }
+        }
+
+        /* RTL Support */
+        [dir="rtl"] .whatsapp-btn {
+            right: auto;
+            left: 30px;
+        }
+
+        [dir="rtl"] .nav-links {
+            flex-direction: row-reverse;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .about-grid,
+            .location-content,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .rooms-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .amenities-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .gallery-item:nth-child(1),
+            .gallery-item:nth-child(6) {
+                grid-column: span 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: var(--white);
+                flex-direction: column;
+                justify-content: flex-start;
+                padding-top: 50px;
+                transition: left 0.3s;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .rooms-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .amenities-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Loading state */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading indicator -->
+    <div class="loading" id="loading">Loading...</div>
+
+    <!-- Main content (hidden until loaded) -->
+    <div id="main-content" style="display: none;">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="logo" id="logo">Villa Paradise</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" data-i18n="nav.home">Home</a></li>
+                <li><a href="#about" data-i18n="nav.about">About</a></li>
+                <li><a href="#rooms" data-i18n="nav.rooms">Rooms</a></li>
+                <li><a href="#amenities" data-i18n="nav.amenities">Amenities</a></li>
+                <li><a href="#gallery" data-i18n="nav.gallery">Gallery</a></li>
+                <li><a href="#location" data-i18n="nav.location">Location</a></li>
+                <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+                <li class="lang-switcher">
+                    <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
+                    <button class="lang-btn" onclick="setLanguage('id')">ID</button>
+                    <button class="lang-btn" onclick="setLanguage('ar')">AR</button>
+                </li>
+            </ul>
+            <div class="mobile-menu-btn" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="img-placeholder" data-label="Hero Image" id="hero-placeholder"></div>
+            <img src="" alt="Hero" class="hero-image" id="hero-image" style="display: none;">
+            <div class="hero-bg"></div>
+            <div class="hero-content">
+                <h1 data-i18n="hero.title">Welcome to Paradise</h1>
+                <p data-i18n="hero.subtitle">Experience luxury living in our beautiful villa.</p>
+                <a href="#contact" class="btn" data-i18n="hero.cta">Book Your Stay</a>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about" id="about">
+            <h2 class="section-title" data-i18n="about.title">About Our Villa</h2>
+            <p class="section-subtitle" data-i18n="about.subtitle">Discover the perfect blend of comfort and elegance</p>
+            <div class="about-grid">
+                <div class="about-image" id="about-image-container">
+                    <div class="img-placeholder" data-label="About Image"></div>
+                </div>
+                <div class="about-content">
+                    <h3 data-i18n="about.heading">A Haven of Tranquility</h3>
+                    <p data-i18n="about.p1">Description paragraph 1.</p>
+                    <p data-i18n="about.p2">Description paragraph 2.</p>
+                    <p data-i18n="about.p3">Description paragraph 3.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rooms Section -->
+        <section class="rooms" id="rooms">
+            <h2 class="section-title" data-i18n="rooms.title">Our Accommodations</h2>
+            <p class="section-subtitle" data-i18n="rooms.subtitle">Choose from our beautifully designed spaces</p>
+            <div class="rooms-grid" id="rooms-grid">
+                <!-- Room cards will be inserted here -->
+            </div>
+        </section>
+
+        <!-- Amenities Section -->
+        <section class="amenities" id="amenities">
+            <h2 class="section-title" data-i18n="amenities.title">Villa Amenities</h2>
+            <p class="section-subtitle" data-i18n="amenities.subtitle">Everything you need for a perfect stay</p>
+            <div class="amenities-grid" id="amenities-grid">
+                <!-- Amenities will be inserted here -->
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section class="gallery" id="gallery">
+            <h2 class="section-title" data-i18n="gallery.title">Photo Gallery</h2>
+            <p class="section-subtitle" data-i18n="gallery.subtitle">Take a visual tour of our beautiful villa</p>
+            <div class="gallery-grid" id="gallery-grid">
+                <!-- Gallery items will be inserted here -->
+            </div>
+        </section>
+
+        <!-- Location Section -->
+        <section class="location" id="location">
+            <h2 class="section-title" data-i18n="location.title">How to Get Here</h2>
+            <p class="section-subtitle" data-i18n="location.subtitle">Find us at our convenient location</p>
+            <div class="location-content">
+                <div class="map-container" id="map-container">
+                    <div class="img-placeholder" data-label="Map Image"></div>
+                </div>
+                <div class="location-info">
+                    <h3 data-i18n="location.addressTitle">Our Address</h3>
+                    <ul>
+                        <li>
+                            <span>📍</span>
+                            <div data-i18n="location.address">Address here</div>
+                        </li>
+                        <li>
+                            <span>✈️</span>
+                            <div data-i18n="location.airport">Airport distance</div>
+                        </li>
+                        <li>
+                            <span>🚗</span>
+                            <div data-i18n="location.city">City distance</div>
+                        </li>
+                        <li>
+                            <span>🏖️</span>
+                            <div data-i18n="location.beach">Beach distance</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact" id="contact">
+            <h2 class="section-title" data-i18n="contact.title">Contact Us</h2>
+            <p class="section-subtitle" data-i18n="contact.subtitle">Get in touch for reservations and inquiries</p>
+            <div class="contact-grid">
+                <form class="contact-form" onsubmit="handleSubmit(event)">
+                    <input type="text" data-i18n-placeholder="contact.form.name" required>
+                    <input type="email" data-i18n-placeholder="contact.form.email" required>
+                    <input type="tel" data-i18n-placeholder="contact.form.phone">
+                    <input type="text" data-i18n-placeholder="contact.form.dates">
+                    <textarea data-i18n-placeholder="contact.form.message"></textarea>
+                    <button type="submit" class="btn" data-i18n="contact.form.submit">Send Message</button>
+                </form>
+                <div class="contact-info-box">
+                    <h3 data-i18n="contact.infoTitle">Get In Touch</h3>
+                    <div class="contact-item">
+                        <span>📞</span>
+                        <div id="phone-display">+62 812 3456 7890</div>
+                    </div>
+                    <div class="contact-item">
+                        <span>✉️</span>
+                        <div id="email-display">info@villaparadise.com</div>
+                    </div>
+                    <div class="contact-item">
+                        <span>📍</span>
+                        <div data-i18n="location.address">Address here</div>
+                    </div>
+                    <div class="contact-item">
+                        <span>⏰</span>
+                        <div data-i18n="contact.hours">Check-in: 2PM | Check-out: 12PM</div>
+                    </div>
+                    <div class="social-links">
+                        <div class="social-link">📘</div>
+                        <div class="social-link">📷</div>
+                        <div class="social-link">🐦</div>
+                        <div class="social-link">▶️</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p data-i18n="footer.copyright">© 2026 Villa Paradise. All rights reserved.</p>
+        </footer>
+
+        <!-- WhatsApp Button -->
+        <a href="#" class="whatsapp-btn" id="whatsapp-btn" target="_blank">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            <span data-i18n="whatsapp.text">Book Now!</span>
+        </a>
+    </div>
+
+    <script>
+        // Global variables
+        let siteContent = null;
+        let currentLang = 'en';
+        const amenityIcons = ['🏊', '🌿', '🍳', '📶', '❄️', '🚗', '🛎️', '🏖️'];
+
+        // Load content from JSON file
+        async function loadContent() {
+            try {
+                const response = await fetch('content.json');
+                if (!response.ok) throw new Error('Content file not found');
+                siteContent = await response.json();
+                initializeSite();
+            } catch (error) {
+                console.error('Error loading content:', error);
+                // Show error message
+                document.getElementById('loading').textContent = 'Error loading content. Please check content.json file.';
+            }
+        }
+
+        // Initialize the site after content is loaded
+        function initializeSite() {
+            // Hide loading, show content
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
+
+            // Load images
+            loadImages();
+
+            // Build dynamic sections
+            buildRoomsSection();
+            buildAmenitiesSection();
+            buildGallerySection();
+
+            // Apply settings
+            applySettings();
+
+            // Set initial language
+            const savedLang = localStorage.getItem('villa-lang') || 'en';
+            setLanguage(savedLang);
+
+            // Initialize smooth scrolling
+            initSmoothScrolling();
+        }
+
+        // Load and display images
+        function loadImages() {
+            const images = siteContent.images;
+
+            // Hero image
+            if (images.hero) {
+                const heroImg = document.getElementById('hero-image');
+                const heroPlaceholder = document.getElementById('hero-placeholder');
+                heroImg.src = images.hero;
+                heroImg.style.display = 'block';
+                heroPlaceholder.style.display = 'none';
+                heroImg.onerror = () => {
+                    heroImg.style.display = 'none';
+                    heroPlaceholder.style.display = 'flex';
+                };
+            }
+
+            // About image
+            if (images.about) {
+                const aboutContainer = document.getElementById('about-image-container');
+                aboutContainer.innerHTML = `<img src="${images.about}" alt="About" onerror="this.parentElement.innerHTML='<div class=\\'img-placeholder\\' data-label=\\'About Image\\'></div>'">`;
+            }
+
+            // Map image
+            if (images.map) {
+                const mapContainer = document.getElementById('map-container');
+                mapContainer.innerHTML = `<img src="${images.map}" alt="Location Map" onerror="this.parentElement.innerHTML='<div class=\\'img-placeholder\\' data-label=\\'Map Image\\'></div>'">`;
+            }
+        }
+
+        // Build rooms section dynamically
+        function buildRoomsSection() {
+            const roomsGrid = document.getElementById('rooms-grid');
+            const images = siteContent.images;
+            const roomImages = [images.room1, images.room2, images.room3];
+            const roomKeys = ['room1', 'room2', 'room3'];
+
+            roomsGrid.innerHTML = roomKeys.map((key, index) => `
+                <div class="room-card">
+                    <div class="room-image">
+                        ${roomImages[index] 
+                            ? `<img src="${roomImages[index]}" alt="Room ${index + 1}" onerror="this.parentElement.innerHTML='<div class=\\'img-placeholder\\' data-label=\\'Room ${index + 1}\\'></div>'">`
+                            : `<div class="img-placeholder" data-label="Room ${index + 1}"></div>`
+                        }
+                    </div>
+                    <div class="room-content">
+                        <h3 data-i18n="rooms.${key}.title">Room ${index + 1}</h3>
+                        <p data-i18n="rooms.${key}.desc">Room description</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Build amenities section dynamically
+        function buildAmenitiesSection() {
+            const amenitiesGrid = document.getElementById('amenities-grid');
+            
+            amenitiesGrid.innerHTML = amenityIcons.map((icon, index) => `
+                <div class="amenity-item">
+                    <div class="amenity-icon">${icon}</div>
+                    <h4 data-i18n-amenity="${index}">Amenity ${index + 1}</h4>
+                </div>
+            `).join('');
+        }
+
+        // Build gallery section dynamically
+        function buildGallerySection() {
+            const galleryGrid = document.getElementById('gallery-grid');
+            const images = siteContent.images;
+            const galleryImages = [
+                images.gallery1, images.gallery2, images.gallery3,
+                images.gallery4, images.gallery5, images.gallery6
+            ];
+
+            galleryGrid.innerHTML = galleryImages.map((img, index) => `
+                <div class="gallery-item">
+                    ${img 
+                        ? `<img src="${img}" alt="Gallery ${index + 1}" onerror="this.parentElement.innerHTML='<div class=\\'img-placeholder\\' data-label=\\'Gallery ${index + 1}\\'></div>'">`
+                        : `<div class="img-placeholder" data-label="Gallery ${index + 1}"></div>`
+                    }
+                </div>
+            `).join('');
+        }
+
+        // Apply site settings
+        function applySettings() {
+            const settings = siteContent.settings;
+
+            // Update document title
+            document.title = `${settings.villaName} - Luxury Getaway`;
+
+            // Update WhatsApp button
+            const waBtn = document.getElementById('whatsapp-btn');
+            const phone = settings.whatsappNumber.replace(/[^0-9]/g, '');
+            const msg = encodeURIComponent(settings.whatsappMessage);
+            waBtn.href = `https://wa.me/${phone}?text=${msg}`;
+
+            // Update contact info
+            document.getElementById('phone-display').textContent = settings.phoneNumber;
+            document.getElementById('email-display').textContent = settings.emailAddress;
+        }
+
+        // Get nested value from object
+        function getNestedValue(obj, path) {
+            return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+        }
+
+        // Set language
+        function setLanguage(lang) {
+            if (!siteContent) return;
+            
+            currentLang = lang;
+            const isRTL = lang === 'ar';
+            const content = siteContent.content[lang];
+
+            // Update document direction
+            document.documentElement.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
+            document.documentElement.setAttribute('lang', lang);
+
+            // Update logo
+            document.getElementById('logo').textContent = content.logo;
+
+            // Update all text elements
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                const value = getNestedValue(content, key);
+                if (value) {
+                    el.textContent = value;
+                }
+            });
+
+            // Update placeholders
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                const value = getNestedValue(content, key);
+                if (value) {
+                    el.placeholder = value;
+                }
+            });
+
+            // Update amenities (special handling for array)
+            document.querySelectorAll('[data-i18n-amenity]').forEach(el => {
+                const index = parseInt(el.getAttribute('data-i18n-amenity'));
+                if (content.amenities.items && content.amenities.items[index]) {
+                    el.textContent = content.amenities.items[index];
+                }
+            });
+
+            // Update active button
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent === lang.toUpperCase()) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Save preference
+            localStorage.setItem('villa-lang', lang);
+        }
+
+        // Mobile menu toggle
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        // Handle form submission
+        function handleSubmit(event) {
+            event.preventDefault();
+            const messages = {
+                en: 'Thank you for your message! We will contact you soon.',
+                id: 'Terima kasih atas pesan Anda! Kami akan segera menghubungi Anda.',
+                ar: 'شكراً لرسالتك! سنتواصل معك قريباً.'
+            };
+            alert(messages[currentLang]);
+            event.target.reset();
+        }
+
+        // Initialize smooth scrolling
+        function initSmoothScrolling() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        document.getElementById('navLinks').classList.remove('active');
+                    }
+                });
+            });
+        }
+
+        // Start loading content when page loads
+        document.addEventListener('DOMContentLoaded', loadContent);
+    </script>
+</body>
+</html>

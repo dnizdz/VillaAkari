@@ -1,0 +1,289 @@
+{
+  "settings": {
+    "villaName": "Villa Paradise",
+    "whatsappNumber": "+62812010101",
+    "whatsappMessage": "Hi! I am interested in",
+    "phoneNumber": "+62 812 010 1010",
+    "emailAddress": "info@villaparadise.com"
+  },
+  "images": {
+    "hero": "images/hero.jpg",
+    "about": "images/about.jpg",
+    "room1": "images/room1.jpg",
+    "room2": "images/room2.jpg",
+    "room3": "images/room3.jpg",
+    "gallery1": "images/gallery1.jpg",
+    "gallery2": "images/gallery2.jpg",
+    "gallery3": "images/gallery3.jpg",
+    "gallery4": "images/gallery4.jpg",
+    "gallery5": "images/gallery5.jpg",
+    "gallery6": "images/gallery6.jpg",
+    "map": "images/map.jpg"
+  },
+  "content": {
+    "en": {
+      "logo": "Villa Paradise",
+      "nav": {
+        "home": "Home",
+        "about": "About",
+        "rooms": "Rooms",
+        "amenities": "Amenities",
+        "gallery": "Gallery",
+        "location": "Location",
+        "contact": "Contact"
+      },
+      "hero": {
+        "title": "Welcome to Paradise",
+        "subtitle": "",
+        "cta": "Book Your Stay"
+      },
+      "about": {
+        "title": "",
+        "subtitle": "",
+        "heading": "",
+        "p1": "",
+        "p2": "",
+        "p3": ""
+      },
+      "rooms": {
+        "title": "",
+        "subtitle": "",
+        "room1": {
+          "title": "",
+          "desc": ""
+        },
+        "room2": {
+          "title": "",
+          "desc": ""
+        },
+        "room3": {
+          "title": "",
+          "desc": ""
+        }
+      },
+      "amenities": {
+        "title": "",
+        "subtitle": "",
+        "items": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "gallery": {
+        "title": "Photo Gallery",
+        "subtitle": "Take a visual tour of our beautiful villa"
+      },
+      "location": {
+        "title": "",
+        "subtitle": "",
+        "addressTitle": "",
+        "address": "",
+        "airport": "",
+        "city": "",
+        "beach": ""
+      },
+      "contact": {
+        "title": "",
+        "subtitle": "",
+        "infoTitle": "",
+        "hours": "",
+        "form": {
+          "name": "Your Name",
+          "email": "Your Email",
+          "phone": "Your Phone",
+          "dates": "Check-in - Check-out Date",
+          "message": "Your Message",
+          "submit": "Send Message"
+        }
+      },
+      "footer": {
+        "copyright": "© 2026 Villa Paradise. All rights reserved."
+      },
+      "whatsapp": {
+        "text": "Book Now!"
+      }
+    },
+    "id": {
+      "logo": "Villa Paradise",
+      "nav": {
+        "home": "Beranda",
+        "about": "Tentang",
+        "rooms": "Kamar",
+        "amenities": "Fasilitas",
+        "gallery": "Galeri",
+        "location": "Lokasi",
+        "contact": "Kontak"
+      },
+      "hero": {
+        "title": "Selamat Datang di Surga",
+        "subtitle": "",
+        "cta": "Pesan Sekarang"
+      },
+      "about": {
+        "title": "",
+        "subtitle": "",
+        "heading": "",
+        "p1": "",
+        "p2": "",
+        "p3": ""
+      },
+      "rooms": {
+        "title": "",
+        "subtitle": "",
+        "room1": {
+          "title": "",
+          "desc": ""
+        },
+        "room2": {
+          "title": "",
+          "desc": ""
+        },
+        "room3": {
+          "title": "",
+          "desc": ""
+        }
+      },
+      "amenities": {
+        "title": "",
+        "subtitle": "",
+        "items": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "gallery": {
+        "title": "Galeri Foto",
+        "subtitle": "Lihat tur visual villa indah kami"
+      },
+      "location": {
+        "title": "",
+        "subtitle": "",
+        "addressTitle": "",
+        "address": "",
+        "airport": "",
+        "city": "",
+        "beach": ""
+      },
+      "contact": {
+        "title": "",
+        "subtitle": "",
+        "infoTitle": "",
+        "hours": "",
+        "form": {
+          "name": "Nama Anda",
+          "email": "Email Anda",
+          "phone": "Telepon Anda",
+          "dates": "Tanggal Check-in - Check-out",
+          "message": "Pesan Anda",
+          "submit": "Kirim Pesan"
+        }
+      },
+      "footer": {
+        "copyright": "© 2026 Villa Paradise. Hak cipta dilindungi."
+      },
+      "whatsapp": {
+        "text": "Pesan Sekarang!"
+      }
+    },
+    "ar": {
+      "logo": "Villa Paradise",
+      "nav": {
+        "home": "الرئيسية",
+        "about": "عنا",
+        "rooms": "الغرف",
+        "amenities": "المرافق",
+        "gallery": "المعرض",
+        "location": "الموقع",
+        "contact": "اتصل بنا"
+      },
+      "hero": {
+        "title": "مرحباً بكم في الجنة",
+        "subtitle": "",
+        "cta": "احجز إقامتك"
+      },
+      "about": {
+        "title": "",
+        "subtitle": "",
+        "heading": "",
+        "p1": "",
+        "p2": "",
+        "p3": ""
+      },
+      "rooms": {
+        "title": "",
+        "subtitle": "",
+        "room1": {
+          "title": "",
+          "desc": ""
+        },
+        "room2": {
+          "title": "",
+          "desc": ""
+        },
+        "room3": {
+          "title": "",
+          "desc": ""
+        }
+      },
+      "amenities": {
+        "title": "",
+        "subtitle": "",
+        "items": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "gallery": {
+        "title": "معرض الصور",
+        "subtitle": "جولة بصرية في فيلتنا الجميلة"
+      },
+      "location": {
+        "title": "",
+        "subtitle": "",
+        "addressTitle": "",
+        "address": "",
+        "airport": "",
+        "city": "",
+        "beach": ""
+      },
+      "contact": {
+        "title": "",
+        "subtitle": "",
+        "infoTitle": "",
+        "hours": "",
+        "form": {
+          "name": "اسمك",
+          "email": "بريدك الإلكتروني",
+          "phone": "هاتفك",
+          "dates": "تاريخ الوصول - المغادرة",
+          "message": "رسالتك",
+          "submit": "إرسال الرسالة"
+        }
+      },
+      "footer": {
+        "copyright": "© 2026 Villa Paradise. جميع الحقوق محفوظة."
+      },
+      "whatsapp": {
+        "text": "احجز الآن!"
+      }
+    }
+  }
+}
