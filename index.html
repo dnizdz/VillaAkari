@@ -72,6 +72,21 @@
             color: var(--primary-color);
         }
 
+        .nav-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease;
+            z-index: 900;
+        }
+
+        .nav-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
         .lang-switcher {
             display: flex;
             gap: 10px;
@@ -598,18 +613,23 @@
             .nav-links {
                 position: fixed;
                 top: 70px;
-                left: -100%;
-                width: 100%;
+                left: 0;
+                transform: translateX(-100%);
+                width: 280px;
+                max-width: 80%;
                 height: calc(100vh - 70px);
                 background: var(--white);
                 flex-direction: column;
                 justify-content: flex-start;
                 padding-top: 50px;
-                transition: left 0.3s;
+                padding-left: 30px;
+                box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+                transition: transform 0.35s ease;
+                z-index: 1001;
             }
 
             .nav-links.active {
-                left: 0;
+                transform: translateX(0);
             }
 
             .hero-content h1 {
@@ -669,6 +689,7 @@
                 <span></span>
             </div>
         </nav>
+        <div class="nav-overlay" id="navOverlay" onclick="closeMenu()"></div>
 
         <!-- Hero Section -->
         <section class="hero" id="home">
@@ -813,11 +834,277 @@
         </a>
     </div>
 
+    <script src="scripts/menu-scroll.js"></script>
     <script>
         // Global variables
         let siteContent = null;
         let currentLang = 'en';
         const amenityIcons = ['🏊', '🌿', '🍳', '📶', '❄️', '🚗', '🛎️', '🏖️'];
+
+        const defaultImagePaths = {
+            hero: 'images/hero.jpg',
+            about: 'images/about.jpg',
+            room1: 'images/room1.jpg',
+            room2: 'images/room2.jpg',
+            room3: 'images/room3.jpg',
+            gallery1: 'images/gallery1.jpg',
+            gallery2: 'images/gallery2.jpg',
+            gallery3: 'images/gallery3.jpg',
+            gallery4: 'images/gallery4.jpg',
+            gallery5: 'images/gallery5.jpg',
+            gallery6: 'images/gallery6.jpg',
+            map: 'images/map.jpg'
+        };
+
+        const fallbackContent = {
+            settings: {
+                villaName: 'Villa Paradise',
+                whatsappNumber: '+628120000000',
+                whatsappMessage: 'Hi! I am interested in Villa Paradise.',
+                phoneNumber: '+62 812 0000 0000',
+                emailAddress: 'info@villaparadise.com'
+            },
+            images: {},
+            content: {
+                en: {
+                    logo: 'Villa Paradise',
+                    nav: {
+                        home: 'Home',
+                        about: 'About',
+                        rooms: 'Rooms',
+                        amenities: 'Amenities',
+                        gallery: 'Gallery',
+                        location: 'Location',
+                        contact: 'Contact'
+                    },
+                    hero: {
+                        title: 'Welcome to Paradise',
+                        subtitle: 'Luxury awaits even while content loads.',
+                        cta: 'Book Your Stay'
+                    },
+                    about: {
+                        title: 'About Our Villa',
+                        subtitle: 'A tranquil escape near the sea.',
+                        heading: 'A Haven of Tranquility',
+                        p1: 'This villa is designed for comfort.',
+                        p2: 'Every corner offers peace and beauty.',
+                        p3: 'Sit back, relax, and enjoy the view.'
+                    },
+                    rooms: {
+                        title: 'Accommodations',
+                        subtitle: 'Stylish suites with modern amenities.',
+                        room1: { title: 'Garden Suite', desc: 'Cozy room with garden views.' },
+                        room2: { title: 'Pool Suite', desc: 'Suite overlooking the private pool.' },
+                        room3: { title: 'Sky Suite', desc: 'Penthouse room with panoramic views.' }
+                    },
+                    amenities: {
+                        title: 'Villa Amenities',
+                        subtitle: 'Everything you need for a seamless stay.',
+                        items: [
+                            'Private Pool',
+                            'Chef Services',
+                            'Spa Treatments',
+                            'Concierge Assistance',
+                            'Daily Housekeeping',
+                            'Airport Transfers',
+                            'Gym Access',
+                            'Beach Shuttle'
+                        ]
+                    },
+                    gallery: {
+                        title: 'Photo Gallery',
+                        subtitle: 'A visual taste while the rest loads.'
+                    },
+                    location: {
+                        title: 'How to Get Here',
+                        subtitle: 'Minutes from the beach and cultural sights.',
+                        addressTitle: 'Our Address',
+                        address: 'Balinese Coastline, Bali, Indonesia',
+                        airport: '15 minutes from Ngurah Rai Intl Airport',
+                        city: '5 minutes to Seminyak City Center',
+                        beach: 'Oceanfront within a short walk'
+                    },
+                    contact: {
+                        title: 'Contact Us',
+                        subtitle: 'We are ready to welcome you.',
+                        infoTitle: 'Get In Touch',
+                        hours: 'Check-in: 2PM | Check-out: 12PM',
+                        form: {
+                            name: 'Your Name',
+                            email: 'Your Email',
+                            phone: 'Your Phone',
+                            dates: 'Check-in - Check-out Date',
+                            message: 'Your Message',
+                            submit: 'Send Message'
+                        }
+                    },
+                    footer: {
+                        copyright: '© 2026 Villa Paradise. All rights reserved.'
+                    },
+                    whatsapp: {
+                        text: 'Book Now!'
+                    }
+                },
+                id: {
+                    logo: 'Villa Paradise',
+                    nav: {
+                        home: 'Beranda',
+                        about: 'Tentang',
+                        rooms: 'Kamar',
+                        amenities: 'Fasilitas',
+                        gallery: 'Galeri',
+                        location: 'Lokasi',
+                        contact: 'Kontak'
+                    },
+                    hero: {
+                        title: 'Selamat Datang di Surga',
+                        subtitle: 'Kenyamanan menanti walau konten masih dimuat.',
+                        cta: 'Pesan Sekarang'
+                    },
+                    about: {
+                        title: 'Tentang Villa',
+                        subtitle: 'Pelarian tenang di pinggir pantai.',
+                        heading: 'Sebuah Surga Ketentraman',
+                        p1: 'Villa ini dirancang demi kenyamanan Anda.',
+                        p2: 'Setiap sudut menawarkan kedamaian.',
+                        p3: 'Santai dan nikmati pemandangan.'
+                    },
+                    rooms: {
+                        title: 'Akomodasi',
+                        subtitle: 'Suite stylish dengan fasilitas modern.',
+                        room1: { title: 'Suite Taman', desc: 'Kamar nyaman dengan pandangan taman.' },
+                        room2: { title: 'Suite Kolam', desc: 'Suite menghadap kolam renang pribadi.' },
+                        room3: { title: 'Suite Langit', desc: 'Suite kelas atas dengan pemandangan luas.' }
+                    },
+                    amenities: {
+                        title: 'Fasilitas Villa',
+                        subtitle: 'Semua yang diperlukan untuk pengalaman sempurna.',
+                        items: [
+                            'Kolam Renang Pribadi',
+                            'Layanan Koki',
+                            'Spa & Pijat',
+                            'Layanan Concierge',
+                            'Housekeeping Harian',
+                            'Transfer Bandara',
+                            'Akses Gym',
+                            'Shuttle Pantai'
+                        ]
+                    },
+                    gallery: {
+                        title: 'Galeri Foto',
+                        subtitle: 'Sekilas visual sambil semua dimuat.'
+                    },
+                    location: {
+                        title: 'Menuju ke Sini',
+                        subtitle: 'Dekat pantai dan pusat hiburan.',
+                        addressTitle: 'Alamat Kami',
+                        address: 'Pantai Bali, Indonesia',
+                        airport: '15 menit dari Bandara Ngurah Rai',
+                        city: '5 menit ke Pusat Seminyak',
+                        beach: 'Seberang pantai dalam jarak berjalan kaki'
+                    },
+                    contact: {
+                        title: 'Hubungi Kami',
+                        subtitle: 'Kami siap menyambut Anda.',
+                        infoTitle: 'Hubungi Kami',
+                        hours: 'Check-in: 14.00 | Check-out: 12.00',
+                        form: {
+                            name: 'Nama Anda',
+                            email: 'Email Anda',
+                            phone: 'Telepon Anda',
+                            dates: 'Tanggal Check-in - Check-out',
+                            message: 'Pesan Anda',
+                            submit: 'Kirim Pesan'
+                        }
+                    },
+                    footer: {
+                        copyright: '© 2026 Villa Paradise. Hak cipta dilindungi.'
+                    },
+                    whatsapp: {
+                        text: 'Pesan Sekarang!'
+                    }
+                },
+                ar: {
+                    logo: 'Villa Paradise',
+                    nav: {
+                        home: 'الرئيسية',
+                        about: 'عن',
+                        rooms: 'الغرف',
+                        amenities: 'المرافق',
+                        gallery: 'المعرض',
+                        location: 'الموقع',
+                        contact: 'اتصل بنا'
+                    },
+                    hero: {
+                        title: 'مرحبا بكم في الجنة',
+                        subtitle: 'فخامة بانتظارك حتى يكمل المحتوى التحميل.',
+                        cta: 'احجز إقامتك'
+                    },
+                    about: {
+                        title: 'عن الفيلا',
+                        subtitle: 'ملاذ هادئ على شاطئ البحر.',
+                        heading: 'واحة الهدوء',
+                        p1: 'هذا الفيلا مُصمم للراحة المطلقة.',
+                        p2: 'كل زاوية تنضح بالسلام والجمال.',
+                        p3: 'استرخ واستمتع بالإطلالة.'
+                    },
+                    rooms: {
+                        title: 'الإقامة',
+                        subtitle: 'أجنحة أنيقة مع وسائل راحة حديثة.',
+                        room1: { title: 'جناح الحديقة', desc: 'غرفة مريحة بإطلالة على الحديقة.' },
+                        room2: { title: 'جناح المسبح', desc: 'جناح يطل على المسبح الخاص.' },
+                        room3: { title: 'الجناح العالي', desc: 'جناح مع إطلالات بانورامية.' }
+                    },
+                    amenities: {
+                        title: 'مرافق الفيلا',
+                        subtitle: 'كل ما يلزم لبقاء مثالي.',
+                        items: [
+                            'مسبح خاص',
+                            'خدمة طاهٍ',
+                            'علاجات سبا',
+                            'خدمة الكونسيرج',
+                            'تنظيف يومي',
+                            'نقل من المطار',
+                            'صالة رياضية',
+                            'شاتل الشاطئ'
+                        ]
+                    },
+                    gallery: {
+                        title: 'معرض الصور',
+                        subtitle: 'نظرة بصرية حتى يُستكمل التحميل.'
+                    },
+                    location: {
+                        title: 'كيفية الوصول',
+                        subtitle: 'قريب من الشاطئ والمعالم الثقافية.',
+                        addressTitle: 'عنواننا',
+                        address: 'ساحل بالي، إندونيسيا',
+                        airport: '15 دقيقة من مطار نجوراه راي',
+                        city: '5 دقائق إلى مركز سيمينياك',
+                        beach: 'أمام البحر على مسافة مشي قصيرة'
+                    },
+                    contact: {
+                        title: 'تواصل معنا',
+                        subtitle: 'نحن جاهزون لاستقبالك.',
+                        infoTitle: 'اتصل بنا',
+                        hours: 'تسجيل الوصول: 2م | تسجيل المغادرة: 12م',
+                        form: {
+                            name: 'اسمك',
+                            email: 'بريدك الإلكتروني',
+                            phone: 'هاتفك',
+                            dates: 'تواريخ الوصول والمغادرة',
+                            message: 'رسالتك',
+                            submit: 'إرسال الرسالة'
+                        }
+                    },
+                    footer: {
+                        copyright: '© 2026 Villa Paradise. جميع الحقوق محفوظة.'
+                    },
+                    whatsapp: {
+                        text: 'احجز الآن!'
+                    }
+                }
+            }
+        };
 
         // Load content from JSON file
         async function loadContent() {
@@ -825,11 +1112,11 @@
                 const response = await fetch('content.json');
                 if (!response.ok) throw new Error('Content file not found');
                 siteContent = await response.json();
-                initializeSite();
             } catch (error) {
-                console.error('Error loading content:', error);
-                // Show error message
-                document.getElementById('loading').textContent = 'Error loading content. Please check content.json file.';
+                console.warn('Failed to load content.json, falling back to placeholder content.', error);
+                siteContent = fallbackContent;
+            } finally {
+                initializeSite();
             }
         }
 
@@ -855,60 +1142,78 @@
             setLanguage(savedLang);
 
             // Initialize smooth scrolling
-            initSmoothScrolling();
+            if (window.menuScrollModule) {
+                window.menuScrollModule.init({
+                    closeMenu,
+                    header: '.navbar',
+                    offset: 20
+                });
+            }
         }
 
         // Load and display images
         function loadImages() {
-            const images = siteContent.images;
+            const images = {
+                ...defaultImagePaths,
+                ...(siteContent.images || {})
+            };
 
             // Hero image
+            const heroImg = document.getElementById('hero-image');
+            const heroPlaceholder = document.getElementById('hero-placeholder');
+            heroImg.onerror = () => {
+                heroImg.style.display = 'none';
+                heroPlaceholder.style.display = 'flex';
+            };
             if (images.hero) {
-                const heroImg = document.getElementById('hero-image');
-                const heroPlaceholder = document.getElementById('hero-placeholder');
                 heroImg.src = images.hero;
                 heroImg.style.display = 'block';
                 heroPlaceholder.style.display = 'none';
-                heroImg.onerror = () => {
-                    heroImg.style.display = 'none';
-                    heroPlaceholder.style.display = 'flex';
-                };
+            } else {
+                heroImg.style.display = 'none';
+                heroPlaceholder.style.display = 'flex';
             }
 
             // About image
+            const aboutContainer = document.getElementById('about-image-container');
             if (images.about) {
-                const aboutContainer = document.getElementById('about-image-container');
                 aboutContainer.innerHTML = `<img src="${images.about}" alt="About" onerror="this.parentElement.innerHTML='<div class=\\'img-placeholder\\' data-label=\\'About Image\\'></div>'">`;
+            } else {
+                aboutContainer.innerHTML = `<div class="img-placeholder" data-label="About Image"></div>`;
             }
 
             // Map image
+            const mapContainer = document.getElementById('map-container');
             if (images.map) {
-                const mapContainer = document.getElementById('map-container');
                 mapContainer.innerHTML = `<img src="${images.map}" alt="Location Map" onerror="this.parentElement.innerHTML='<div class=\\'img-placeholder\\' data-label=\\'Map Image\\'></div>'">`;
+            } else {
+                mapContainer.innerHTML = `<div class="img-placeholder" data-label="Map Image"></div>`;
             }
         }
 
         // Build rooms section dynamically
         function buildRoomsSection() {
             const roomsGrid = document.getElementById('rooms-grid');
-            const images = siteContent.images;
-            const roomImages = [images.room1, images.room2, images.room3];
+            const images = siteContent.images || {};
             const roomKeys = ['room1', 'room2', 'room3'];
 
-            roomsGrid.innerHTML = roomKeys.map((key, index) => `
-                <div class="room-card">
-                    <div class="room-image">
-                        ${roomImages[index] 
-                            ? `<img src="${roomImages[index]}" alt="Room ${index + 1}" onerror="this.parentElement.innerHTML='<div class=\\'img-placeholder\\' data-label=\\'Room ${index + 1}\\'></div>'">`
-                            : `<div class="img-placeholder" data-label="Room ${index + 1}"></div>`
-                        }
+            roomsGrid.innerHTML = roomKeys.map((key, index) => {
+                const roomImage = images[key];
+                return `
+                    <div class="room-card">
+                        <div class="room-image">
+                            ${roomImage
+                                ? `<img src="${roomImage}" alt="Room ${index + 1}" onerror="this.parentElement.innerHTML='<div class=\\'img-placeholder\\' data-label=\\'Room ${index + 1}\\'></div>'">`
+                                : `<div class="img-placeholder" data-label="Room ${index + 1}"></div>`
+                            }
+                        </div>
+                        <div class="room-content">
+                            <h3 data-i18n="rooms.${key}.title">Room ${index + 1}</h3>
+                            <p data-i18n="rooms.${key}.desc">Room description</p>
+                        </div>
                     </div>
-                    <div class="room-content">
-                        <h3 data-i18n="rooms.${key}.title">Room ${index + 1}</h3>
-                        <p data-i18n="rooms.${key}.desc">Room description</p>
-                    </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
         }
 
         // Build amenities section dynamically
@@ -926,11 +1231,8 @@
         // Build gallery section dynamically
         function buildGallerySection() {
             const galleryGrid = document.getElementById('gallery-grid');
-            const images = siteContent.images;
-            const galleryImages = [
-                images.gallery1, images.gallery2, images.gallery3,
-                images.gallery4, images.gallery5, images.gallery6
-            ];
+            const images = siteContent.images || {};
+            const galleryImages = Array.from({ length: 6 }, (_, index) => images[`gallery${index + 1}`]);
 
             galleryGrid.innerHTML = galleryImages.map((img, index) => `
                 <div class="gallery-item">
@@ -1018,9 +1320,26 @@
             localStorage.setItem('villa-lang', lang);
         }
 
+        const navLinksElement = document.getElementById('navLinks');
+        const navOverlayElement = document.getElementById('navOverlay');
+
+        function openMenu() {
+            navLinksElement.classList.add('active');
+            navOverlayElement.classList.add('active');
+        }
+
+        function closeMenu() {
+            navLinksElement.classList.remove('active');
+            navOverlayElement.classList.remove('active');
+        }
+
         // Mobile menu toggle
         function toggleMenu() {
-            document.getElementById('navLinks').classList.toggle('active');
+            if (navLinksElement.classList.contains('active')) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
         }
 
         // Handle form submission
@@ -1033,20 +1352,6 @@
             };
             alert(messages[currentLang]);
             event.target.reset();
-        }
-
-        // Initialize smooth scrolling
-        function initSmoothScrolling() {
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        document.getElementById('navLinks').classList.remove('active');
-                    }
-                });
-            });
         }
 
         // Start loading content when page loads
